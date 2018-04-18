@@ -1,0 +1,94 @@
+Concept:
+#for getting input from user, just like scanf:
+Scanner keyboard = new Scanner(System.in);
+int ans = keyboard.nextInt(); // for getting in an int
+String str = keyboard.next(); // for getting in a single word
+String message = input.nextLine(); //this will take a full string unlike next(), it also takes spaces
+double db = keyboard.nextDouble(); //for getting a double
+
+Thread.sleep(200); //sleep for 200msec
+System.exit(0); // for exiting successfully
+
+int a = Integer.parseInt(string); //this fellow does the work of atoi
+boolean i = "axe".equals("axe");//if using compareTo, change the data type of i to int
+Random r = new Random(); //for random number generation
+int dice1 = 1+r.nextInt(6);//max random value can be 6, i.e.  it runs from 0 to 5, hence added 1
+String.valueOf(X): will be writing on window/GUI
+
+> in java methods are virtual by default. They are made non-virtual by using keyword final. In java private methods
+  by default are final and cannot be overriden
+> as a guideline, if you have a virtual function in your class, then add a virtual destructor
+> Java doesn't support multiple inheritance unlike c++ in case of class, however it could be done in case of interface
+> An interface which has no members inside is called as Marker or Tagged interface.
+> In java, private functions cannot be overriden
+> Arrays in Java can be compared using:
+	Arrays.equals(arr1, arr2);
+	or
+	Arrays.deepEquals(arr1, arr2);
+>Regarding Arrays.sort():
+eg: int[] arr = {13, 7, 6, 45, 21, 9, 101, 102};
+Arrays.sort(arr); //sorts the input array, doesnt return anything
+Arrays.sort(arr, 1, 5); //sorts the input array from 7 to 9
+Arrays.sort(arr,  Collections.reverseOrder()); // sorts in descending order. remember to include util Collections
+-> the above API's can be used in exact same manner for Strings as well instead of int
+-> Arrays.sort() works for arrays which can be of primitive data type also. Collections.sort() works for objects
+   Collections like ArrayList, LinkedList, etc. 
+-> System.out.println(Arrays.toString(ar)); // for printing the complete array in one go
+
+> Comparator Interface:
+
+	
+>StringBuilder should be used when you have to modify the string, i.e. any char inside a string
+eg: if the requirement says "hello" has to be modified to "jello" then in that case use StringBuilder
+
+>HashTable and Map can be used interchangeably, however HashMap is faster than HashTable, but it lacks synchronisation.
+HashTable is more like a legacy
+HashMap<Integer,String> hm=new HashMap<Integer,String>(); 
+hm.put(1,"abc");
+hm.put(2, "xyz");
+  for(Map.Entry m:hm.entrySet()){  //entrySet returns the whole Map as a collection view
+   System.out.println(m.getKey()+" "+m.getValue());
+hm.remove(1);//delete from the Map   
+	
+> By just replacing the scanner for reading input with BufferedReader, I was able to pass one extra test case for which i was getting
+the error of Time Limit Exceeded. Clearly BufferedReader is faster than Scanner	
+> In Java, array are objects, and object variable are always referenced in Java. So even if you declare it as final,
+  its value can be modified. In java object declared as final cannot be made to refer to something else.
+> If a class is declared as final then by default all of the methods present in that class are automatically final but variables are not.
+> The finally keyword is used in association with a try/catch block and guarantees that a section of code will be executed, 
+  even if an exception is thrown, or even if a return statement is written.
+> System.gc() will notify JVM to perform garbage collection. it internally calls Runtime.getRuntime().gc(). System.gc is class method, 
+  whereas runtime.gc is a instance method.  
+> If you want to create an array of objects in Java, then just declaring like this will not help:
+	Node [] n1 = new Node[size];
+	You will have to manually do a new for each and every object. As in like this:
+	n1[0]=new Node();
+> Dequeue is a data structure available in Java. I used it for the problem Shino and Closest Kth ancestor in hackerearth september circuit.
+> compiling with a '-d' option stores the result in different directory, which has to be provided during compilation
+> Suppose you have jar file/different class in lib directory, then to compile you can use
+#cp_tutorial/proj2/src>javac -d ../classes -cp ../../proj1/lib MainClass.java
+and to execute
+#cp_tutorial/proj2/classes>java -cp ../../proj1/lib; MainClass
+
+Swing/GUI:::
+import javax.swing.JFrame;
+JFrame win = new JFrame("Window Title Text Goes Here");
+win.setSize(x,y);
+win.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+smiling_face canvas = new smiling_face();//this code has graph which can help u place elements on screen
+win.add(canvas);
+win.setVisible(true);
+
+JOptionPane.showInputDialog("String that u want to show"); //swing for taking in user input
+
+Findings:
+#javac -version
+
+Trouble Shooting:
+unsupported major minor version of 52.0.
+Goto windows->preference->java->compiler, and select compatible compiler version to 1.7
+
+design patterns: 
+Creational = Abstract; Factory; Singleton
+Structural = Adapter; Bridge; Composite; Decorator; Facade
+Behavioral = Iterator; Strategy; Template

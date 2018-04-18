@@ -1,0 +1,11 @@
+1) Difference between new and malloc
+2) what would happen if a vector exhausts its capacity
+3) when to use an array or a vector
+4) Difference between copy constructor and assignment operator
+5) Abstract and interface class, when to use which one
+6) move semantics in c++
+7) implement you're own vector - had to use template, and i messed up this one
+8) file core >> and this command will tell u that this core belongs to which executable
+9) keyword using to stop inheritance
+
+  

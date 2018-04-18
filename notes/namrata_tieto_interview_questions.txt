@@ -1,0 +1,18 @@
+1. Implement default constructor, destructor, assignment operator and copy constructor for a class having character pointer(This is must do question. Prepare well)
+2. Difference between copy constructor and assignment operator
+3. Operator overloading such as =, ++, --, New operator overload (Important)
+4. Difference between new syntax   new int(4) and new int[4] ?
+5. Class inheritance
+6. Static member variable and member function properties such as why this pointer is not passed to static function etc
+7. mutable and explicit usage
+8. Deep understating of how Vtable is constructed ? (Most of the questions are based on this)
+9. why Virtual constructor not possible but we can virtual destructor why ?
+10. Use of virtual destructor ? Realtime usage ?
+11. Design pattern (Singleton at least)
+12. Logical questions based on Linked list such as reversal, intersection etc
+13. What is data abstraction and data hiding (Real time example is must. Prepare well)
+14. C++11 features such as Initializer list, Auto keyword, Smart pointer (Good to have), nullptr, range based loops
+15. STL questions such as container(map, vector, list etc ..) their properties. Writing and reading form container
+16. Exception handling (Important)
+17. Threading and synchronization 
+18. How to make sure that object would not be created on stack ?

@@ -1,0 +1,183 @@
+1. Setting in visual studio to see assembly code and try to check how template 
+instantiation happens ?
+
+2. How code bloat happens ? 
+
+3. Dont change value in any associative container directly Why ?
+(Actual we cant do that bcoz iterator returned is constatnt)
+
+4. Very good use of extern "C" ? ABI issue.
+
+5. How to find capability of Iterators ?
+
+6. en.cppreference.com
+
+7. Check if any type of constructor is called in rotate() ?
+
+Seon parents talk
+
+8. ***Use of Smart Pointer 
+
+9. PVS-Studio good article.
+
+bit.ly/tieto_stl_demos_22_12_2015
+
+umar.majid@gmail.com
+
+1. Check examples on Scott Meyers Book Page-59. How base class assignment operator is invoked & how Customer(rhs) works as rhs type is PriorityCustomer
+
+===========================================================================================================================
+Important :- 80-20 Rule :- It means that 80% of time, memory, resources of your program are consumed by 20% of your code. So if someone really wants to improve efficiency of his code then he must find out that 20% of code and make it more efficient. This can be done by Profiling your code.
+
+1. Initializer list and Uniform Initialization also Initialization list
+2. Delegating constructor :- Calling one constructor from other to avoid code duplication. This was introduced in C++11
+3. Virtual function controls override, final, default and delete
+4. Why moving object(std::move()) is faster than copying object (copy constructor)
+5. Advantage of using Initialization list :- In case you initialize member variable inside constructor then Default constructor is called first before entering into constructor definition "{" for that member and then assignment operator is called. But if you initialize that  member in initialization list then only copy constructor is called hence it's more efficient. Also it is needed to initialize constant and reference members of class which must be assigned before constructor definition starts.
+6. Avoid initialization order problems across translation units by replacing non-local static objects with local static objects
+7. To disallow functionality automatically provided by compilers, declare the corresponding member functions private and give no implementations.Using a base class like Uncopyable is one way to do this(P-39)
+8. Polymorphic base classes should declare virtual destructors. If a class has any virtual functions, it should have a virtual destructor.
+9. Classes not designed to be base classes or not designed to be used polymorphically should not declare virtual destructors.
+10. Destructors should never emit exceptions. If functions called in a destructor may throw, the destructor should catch any exceptions,
+then swallow them or terminate the program.
+10-A. In case of constructor too if exception occurs during construction then we must catch those exception and release all resources which are acquired during construction and throw exception. This is important because if construction is not successful then destructor will never be called for those object so cleaning up all resources in object construction is very important.
+11. If class clients need to be able to react to exceptions thrown during an operation, the class should provide a regular (i.e., non-destructor) function that performs the operation.
+12. Don’t call virtual functions during construction or destruction, because such calls will never go to a more derived class than that of
+the currently executing constructor or destructor.
+13. Have assignment operators return a reference to *this so that things like x=y=z=15; is possible.
+14. Make sure operator= is well-behaved when an object is assigned to itself. Techniques include comparing addresses of source and target
+objects, careful statement ordering, and copy-and-swap.
+15. Make sure that any function operating on more than one object behaves correctly if two or more of the objects are the same.
+16. Having the copy constructor call the copy assignment operator is "WRONG" and vice versa is also wrong.
+17. Copying functions should be sure to copy all of an object’s data members and all of its base class parts.
+18. Both auto_ptr and tr1::shared_ptr use delete in their destructors, notdelete []. That means that using auto_ptr or tr1::shared_ptr with dynamically allocated arrays is a bad idea
+19. To prevent resource leaks, use RAII objects that acquire resources in their constructors and release them in their destructors (E.g. Smart Pointers)
+20. Because of abnormal copying and assignment behaviour of std::auto_ptr(Copying an auto_ptr sets it to null.), we can not hold it in STL containers.
+21. Common RAII class copying behaviours are disallowing copying and performing reference counting, but other behaviours are possible.
+22. APIs often require access to raw resources, so each RAII class should offer a way to get at the resource it manages. E,g. get() method on std::shared_ptr
+23. If you use [] in a new expression, you must use [] in the corresponding delete expression. If you don’t use [] in a new expression, you
+mustn’t use [] in the corresponding delete expression.
+24. Store newed objects in smart pointers in standalone statements. Failure to do this can lead to subtle resource leaks when exceptions
+are thrown. (See example on page P-77)
+25. Class design is type design. Before defining a new type, be sure to consider all the issues discussed in this Item. Refer Page P-85 to understand questions that you should ask yourself before you start class design. 
+26. If you peek under the hood of a C++ compiler, you’ll find that references are typically implemented as pointers, so passing something by reference usually means really passing a pointer. As a result, if you have an object of a built-in type (e.g., an int), it’s often more efficient to pass it by value than by reference.
+27. Prefer pass-by-reference-to-const over pass-by-value. It’s typically more efficient and it avoids the slicing problem.
+28. The rule doesn’t apply to built-in types and STL iterator and function object types. For them, pass-by-value is usually appropriate.
+29. Never return a pointer or reference to a local stack object, a reference to a heap-allocated object, or a pointer or reference to a local static object if there is a chance that more than one such object will be needed
+30. Declare data members private. It gives clients syntactically uniform access to data, affords fine-grained access control, allows invariants to be enforced, and offers class authors implementation flexibility(i.e. you can change implementation of a class method but client code remains unaffected.)
+31. protected is no more encapsulated than public as any changes in protected members affects all derived classes using it.
+32. Prefer non-member non-friend functions to member functions. Doing so increases encapsulation, packaging flexibility, and functional extensibility. (P-100)
+33. Postpone variable definitions as long as possible. It increases program clarity and improves program efficiency(Read Page P-116 for the example of defining object inside & outside of loop).
+34. Avoid casts whenever practical, especially dynamic_casts in performance- sensitive code. If a design requires casting, try to develop a cast-free alternative.
+35. When casting is necessary, try to hide it inside a function. Clients can then call the function instead of putting casts in their own code.
+36. Prefer C++-style casts to old-style casts. They are easier to see, and they are more specific about what they do. 37. Avoid returning handles (references, pointers, or iterators) to object internals. Not returning handles increases encapsulation, helps const member functions act const, and minimizes the creation of dangling handles
+37. Exception-safe functions leak no resources and allow no data structures to become corrupted, even when exceptions are thrown. Such
+functions offer the basic, strong, or nothrow guarantees.
+38. The strong guarantee can often be implemented via copy-and-swap, but the strong guarantee is not practical for all functions
+39. Limit most inlining to small, frequently called functions. This facilitates debugging and binary upgradability, minimizes potential code
+bloat, and maximizes the chances of greater program speed.
+***40. 80-20 rule :- A typical program spends 80% of its time executing only 20% of its code so concentrate on that 20% code if you really want to optimize your program
+41. The key to this separation is replacement of dependencies on definitions with dependencies on declarations That’s the essence of minimizing compilation dependencies: make your header files self-sufficient whenever it’s practical, and when it’s not, depend on declarations in other files
+42. Public inheritance means “is-a.” Everything that applies to base classes must also apply to derived classes, because every derived class object is a base class object.
+43. Names in derived classes hide names in base classes. Under public inheritance, this is never desirable
+44. To make hidden names visible again, employ using declarations(E.g. using BaseClss::FunctionName inside Derived class) or forwarding functions.(E.g. Calling BaseClss::FunctionName() inside derived class method)
+45. Pure virtual functions specify inheritance of interface only(Derived class MUST provide implementation). Simple (impure) virtual functions specify inheritance of interface plus inheritance of a default implementation.Non-virtual functions specify inheritance of interface plus inheritance of a mandatory implementation
+46. Use the non-virtual interface idiom (NVI idiom), a form of the Template Method design pattern that wraps public non-virtual member functions around less accessible virtual functions.
+47. Replace virtual functions with function pointer data members, a stripped-down manifestation of the Strategy design pattern
+48. Replace virtual functions in one hierarchy with virtual functions in another hierarchy. This is the conventional implementation of the Strategy design pattern.
+49. Never redefine an inherited non-virtual function. Item
+50. Never redefine an inherited default parameter value, because default parameter values are statically bound, while virtual functions are dynamically bound
+51. What is preferable inheritance or  composition ?
+52. Multiple inheritance is more complex than single inheritance. It can lead to new ambiguity issues and to the need for virtual inheritance.
+53. Virtual inheritance imposes costs in size, speed, and complexity of initialization and assignment. It’s most practical when virtual base classes have no data.
+54. set_new_handler allows you to specify a function to be called when memory allocation requests cannot be satisfied
+55. Nothrow new is of limited utility, because it applies only to memory allocation; associated constructor calls may still throw exceptions.
+56. There are many valid reasons for writing custom versions of new and delete, including improving performance, debugging heap usage errors, and collecting heap usage information.
+57. operator new should contain an infinite loop trying to allocate memory, should call the new-handler if it can’t satisfy a memory request, and should handle requests for zero bytes. Class-specific versions should handle requests for larger blocks than expected.
+58. operator delete should do nothing if passed a pointer that is null. Class-specific versions should handle blocks that are larger than expected
+59. It's safe to delete nullptr (any null pointer)
+60. Passing a temporary object to a non-const reference parameter is not allowed for function calls
+61. Exception can be cached as value, reference or pointer. Out of these 3 ways prefer catching by reference as other two have some drawbacks. 
+62. When we throw any object in exception it's copy is caught in catch() block irrespective of whether catch() block is catching it by value or reference(correct even reference!!!). This behaviour is forced by C++ because if you throw local object and if it's reference is cached in catch() block then you end up having reference to a object which has been destructed as soon as you leave throwing block.
+63. About all you need to remember is not to throw a pointer to a local object, because that local object will be destroyed when the exception leaves the local object’s scope. The catch clause would then be initialized with a pointer to an object that had already been destroyed.
+64. No implicit conversion is allowed in exception catching. E.g. if we have a exception which throws int and catching block which catches double still int throwing exception is not caught by double catching statement. 
+65. But Inheritance based conversion is allowed in exception throwing. E.g. Derived class object throwing can be cached by base class object catch. Also catch block matching is done based on "First Match" basis. E.g. if we throw derived class object and we have catch with base class object and after that we have catch with derived class object still first match is found and exception is cached by catch with base class object. 
+66. Throwing exception as pointer is possible only if pointer to global, heap(allocated) or static object is passed. If you pass pointer to local object in throwing exception then it's wrong.
+67. Use exception specifications judiciously b'coz failing to adhere to exception specifications result in program terminate. Calling function F2() who don't offer any exception specification(so anything can be thrown from F2()) from function void F1() throw(int) who promise to throw only int is dangerous. 
+68. Understand the costs of exception handling - To minimize your exception-related costs, compile without support for exceptions when that is feasible; limit your use of try blocks and exception specifications to those locations where you honestly need them; and throw exceptions only under conditions that are truly exceptional.
+69. Avoid creating temporary objects. Their main sources are implicit type conversion & function returning object.
+IMP70. As temporary objects are created in implicit conversions such as char* to string we should avoid such conversions for better efficiency. This can be done by providing overloaded versions of functions do accept specific types (E.g. in TinyXml lib we have functions which accepts both string and char* even though only having functions accepting String would have worked).  
+71. How to limit object creation to specific number ?
+72. How to find if object is on heap ?
+73. How to avoid creating objects on heap ?
+***74. Operator overloading is invoked based on static types. So if B-Base Class and D-Derived class then if
+B *b1 = &D1 and B *b2 = &D2 (D1 and D2 are objects of type D)
+*b1=*b2 --> This statement is expected to invoke assignment operator of derived class but it invokes base class assignment operator so only base part of b1 will change.
+74. extern "C" directive is used in C++ code to call function in C-Style library from C++ code. Vice-a-versa is also possible -
+You can even declare C++ functions extern "C". This can be useful if you’re writing a library in C++ that you’d like to provide to clients using other programming languages. By suppressing the name mangling of your C++ function names, your clients can use the natural and intuitive names you choose instead of the mangled names your compilers would otherwise generate.
+75. The way Construction & destruction of static objects in C++ code depends on having main() in C++, it's very important to have your program main in C++ even though most of your code is in C and you have small part in C++.
+76. Result is undefined if we delete malloc memory or free memory obtained from new.
+77. Don't use "using namespace std"
+78. C++ class invariants
+79. RAII --> The technique of acquiring resources in a constructor and releasing them in a destructor, known as Resource Acquisition Is Initialization or RAII
+***80. C++11 --> Brace-Initialization (or list initialization)--> Advantage --> It gives compile time error if we perform narrowing operations such as int --> char, double --> int E.g. char ch = 800 --> No Error but char ch{800} gives narrowing operation error.
+***81. Refer my TestInitialization project for move constructor and move assignment operator experiment
+:- After I did above experiment I found that if I do std::move(object) and don't provide move constructor copy constructor will be called. Also If I return object from the function and don't provide move constructor it will call copy constructor instead of move constructor. So it's advisable that you should provide move constructor for your heavy classes. Especially if you are returning that class objects from functions.
+82. Every container like std::vector has alias such as "using value_type = T" so that we can get type name to vector by "typeid(T::value_type).name()"
+83. std::string has a move constructor to returning even long strings by value is also efficient.
+84. Instead of assigning("=") any container like vector to other consider using reference, pointer or move operation.
+85. The at() operation is a vector subscript operation that throws an exception of type out_of_range if its argument is out of the vector’s range so we should prefer this rather than normal subscript("[]") operator.
+86. Unless you have a reason not to, use a vector. A vector performs better for traversal (e.g., find() and count()) and for sorting and searching (e.g., sort() and binary_search()).
+87. The unordered containers are optimized for lookup with a key (often a string); in other words, they are implemented using hash tables.
+88. StrousStrup :- I recommend the standard-library vector as the default type for sequences of elements: you need a reason to choose another.
+89. Catch common exceptions in main() so that if you miss to catch any exception your final catch in main() will catch it and provide more information rather than just terminating. 
+90. However, these ‘‘smart pointers’’ are still conceptually pointers and therefore only my second choice for resource management – after containers and other types that manage their resources at a higher conceptual level ???
+91. constexpr float min = numeric_limits<float>::min(); // smallest positive float (§40.2)
+92. iterator_traits ???
+93. Type Predicates ???
+94. pair and tuple ???
+95. Use unique_ptr to refer to objects of polymorphic type, Use shared_ptr to refer to shared objects
+***96. bool b1 {a==b};If a and b have the same value, b1 becomes true; otherwise, b1 becomes false
+97. I recommend using = rather than {} for objects specified auto whenever we don’t mean ‘‘list.’’
+98. It is not possible to (re)define an operator for a pair of built-in types, such as pointers Why ???
+-->
+99. A break is the most common way of terminating a case, but a return is often useful.
+100. It is not always obvious what is the right type to use for a controlled variable in a for loop, so auto often comes in handy. So large for loops where termination value is quite large to hold it in int will result in wrong termination check so prefer auto.
+***101. "constexpr constructor" ???
+
+
+==============================================Use in tax Server=========================================================
+1. Use of regular expression in standard-library to validate various formats such as date of birth, national registration idea
+2. use of mathematical algorithms such as accumulate() to add values in container 
+3. 
+
+============================================================================================================================
+
+Hello,
+            Below book names are taken from More Effective C++ book "Recommended Reading" section. 
+
+1. the design and evolution of c++ by bjarne stroustrup pdf
+2. The C++ Programming Language - Good for STL also
+3. C++ Strategies and Tactics --> Template design (2 chapters), Migrating from C development to C++ development (1 chapter)
+4. C++ Programming Style --> Book containing lot of programming examples
+5. Design Patterns: Elements of Reusable Object-Oriented Software --> Design Pattern. 
+
+============================================================================================================================
+
+Things to Understand :-
+
+1. Item 39: Use private inheritance judiciously.
+2. Item 40: Use multiple inheritance judiciously.
+3. Item 41: Understand implicit interfaces and compile time polymorphism.
+4. Item 43: Know how to access names in templatized base classes.
+5. Item 42: Understand the two meanings of typename.
+6. All chapter 7 in fact
+7. 
+
+
+
+
+
+
+
+

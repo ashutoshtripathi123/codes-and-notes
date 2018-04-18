@@ -1,0 +1,214 @@
+======================================= constructor =======================================================
+> we need to define our own copy constructor only if an object has pointers or any run time allocation of resources like file handle, 
+a network connection, etc.
+> if we pass argument by value in a copy constructor, a call to copy constructor would be made to call copy constructor which becomes a
+non-terminating chain of calls. Therefore compiler doesn't allow parameters to be passed by value
+In C++, a Copy Constructor may be called in following cases:
+1. When an object of the class is returned by value.
+2. When an object of the class is passed (to a function) by value as an argument.
+3. When an object is constructed based on another object of the same class.
+4. When compiler generates a temporary object.
+> say suppose you have a constructor as Fraction(int nominator, int denominator=1). So i can call this constructor during following
+object creation:
+Fraction f1 = Fraction(6,7); OR
+Fraction f2 = Fraction(6); // here the denominator will be passed as default which is 1
+
+>class Something
+{
+private:
+    const int m_value;
+ 
+public:
+    Something(): m_value(5) // directly initialize our const member variable
+    {
+    } 
+};
+// The above is the only way thru which i can initialize a const value private member of a class.
+>a destructor will never take any parameter unlike constructor which can take parameters for initialization
+>default copy constructor is provided by the compiler
+>if copy constructor is made private, then it won't allow objects to get copied
+>read about elision: http://www.learncpp.com/cpp-tutorial/911-the-copy-constructor/
+eg: B ob = "show me"; in this case ideally, the compiler should create a new temporary object with value "show me", and then perform the copy
+however due to optimization, the compiler would treat this as B ob("show me");
+In order to avoid elision, when compiling you're code, use the flag -fno-elide-constructors
+
+>constructor cannot be defined as virtual, it gives a compilation error. In fact except inline, no other keyword is allowed in the declaration of constructor.
+>Any constructor that can be called with a single argument works as a conversion constructor, means it can also be used for implicit conversion to the class being constructed.
+#include<iostream> 
+using namespace std;
+ 
+class Point
+{
+private:
+    int x, y;
+public:
+    Point(int i = 0, int j = 0) {
+        x = i;   y = j;
+    }
+    void print() {
+        cout << endl << " x = " << x << ", y = " << y;
+    }
+};
+ 
+int main() {
+    Point t(20, 20);
+    t.print();
+    t = 30;   // Member x of t becomes 30
+    t.print();
+    return 0;
+}
+however this can be avoided with the usage of the keyword explicit in the constructor, write explicit just before Point in constructor definition
+>http://www.geeksforgeeks.org/copy-constructor-argument-const/
+> virtual destructors: http://www.geeksforgeeks.org/pure-virtual-destructor-c/
+> private destructors: http://www.geeksforgeeks.org/private-destructor/ You have to read this to understand, how we can avoid creating objects on stack
+> destructors can be declared in private section, however the same condition of private constructors are applicable in that case.
+Conditions such as I cannot create a direct object, or delete an object which has a memory allocated, because in that case, compiler calls destructor,
+and our class has destructor in private section. It is done in case when I want to conrtol deletion of objects. A friend function is useful in that case.
+
+==========================================================================================================
+> e.g., = rather than strcpy() for copying and == rather than strcmp() for comparing) can be used in cpp
+    unordered_map<int, int> m;
+    queue<pair<Node*, int>> q;
+> The ‘this’ pointer is passed as a hidden argument to all nonstatic member function calls and is available as a local variable within the body of all nonstatic functions. ‘this’ pointer is a constant pointer that holds the memory address of the current object. ‘this’ pointer is not available in static member functions as static member functions can be called without any object (with class name).	
+
+Tuples in C++ - I needed this for Mathison and medical facilities problem.
+Here's the link: http://www.geeksforgeeks.org/tuples-in-c/
+
+If you have a vector<int> ar //this is similar to ArrayList in Java, and you want to sort this in reverse order then:
+sort(ar.rbegin, ar.rend); //this will sort the array
+========================= static =====================================
+>static functions or variables in c++ can be called even without creating objects
+>static variables need to be initialized outside the class compulsarily, like this=> int Something::s_value = 1; where s_value is a static int variable, private or public doesn't matter, and int Something:: getNextValue(){return s_value;}
+However if ur static variable is private, then u cannot directly access it using scope resolution operator, it throws the same error,
+saying that cannot access a private member directly.
+Do note, in both definitions I am not using the keyword static
+>static functions can call only static members, its because non static members are associated with some object, but static function is independent of objects
+>static member function do not have access to this pointer
+>static member function cannot be virtual, const, volatile, const volatile
+>unlike normal variables, static variables are shared by all objects. So if thru one object you modify the static variable, then that change
+will be visible to other object of the same class as well
+>Consequently, it is better to think of static members as belonging to the class itself, not to the objects of the class. 
+Because s_value exists independently of any class objects, it can be accessed directly using the class name and the scope resolution operator 
+
+========================= virtual ====================================
+>avoid calling virtual functions from constructor or destructor, as the result may vary from expectation. it wont give compilation issue,
+but it might be possible that child objects might not exist if parent virtual is called,hence it will settle with calling self.
+>signatures of functions must match exactly when using virtual. To ensure it happens, include the keyword override, just before the opening
+braces of child's function. This will ensure that child functions signature matches the parent functions signature.
+HENCE ALWAYS INCLUDE THE KEYWORD OVERRIDE WHEN USING VIRTUAL
+> In the case where we want to restrict the user from overriding a function, the final specifier is used in the same place the override specifier is
+>also if i want to restrict any class from getting inherited, I can use keyword final. eg: class B final : public A 
+Rule: Whenever you are dealing with inheritance, you should make any explicit destructors virtual.
+>if a class has a pure virtual function, then I cannot create object(by value) for the class. the derived ones are supposed to define them compulsarily,
+otherwise they become abstract too
+>Interface is a class which has only pure virtual functions. Don’t forget to include a virtual destructor for your interface classes, so that the proper derived destructor will be called if a pointer to the interface is deleted
+>object slicing from learncpp
+>to save urself from the diamond problem, include the keyword virtual when inheriting the base class
+eg: class Scanner: virtual public PoweredDevice
+>pure virtual function is also called as abstract base class
+>a class having pure virtual function, cannot create its own object directly
+Virtual destructors = http://www.geeksforgeeks.org/pure-virtual-destructor-c/
+> Can a virtual function be declared as inline. Yes and No both. Yes in case if the object is defined by value. Coz in that case, the compiler would be knowing during compilation time, which function needs to be called. In case if you're creating you're object by reference, then No, as virtual function resolution would be required to be done during run time, so in that case you cannot have virtual function as inline.
+
+============================================ operator overloading =========================================
+>in C++ operators are treated as functions. Hence if you see a+b; you should interpret it as operator+(a,b), only if operator overloading is done via friend function
+>Following keywords cannot be overloaded:: 
+conditional (?:), sizeof, scope (::), member selector (.), and member pointer selector (.*)
+>atleast one of the operand, i.e. data passed to the overloaded operator must be user defined(class or enum), otherwise compiler will use
+the one which is default.
+>there are three different ways to overload operators: the member function way, the friend function way, and the normal function way
+>member function type of overloading should be used only when the first parameter passed is of the type class. it cannot be eg: int, or ostream
+this is the reason why operator << cannot be overloaded using member function technique
+=========================================== vector ============================================
+>vector elements are placed in contagious locations, so that it can be accessed using iterators
+========================================= STL =================================================
+STL has 4 components: Iterators, Algorithms, Containers, and Functions
+Algorithms: Searching, Sorting, etc.
+Containers: queue, priority_queue, stack, set, multiset, map, multimap, heap
+Sets are a type of associative containers in which each element has to be unique, because the value of the element identifies it
+If asked when will u use a vector over an array. Give them a classic example of graphs, where it is unnecessary and adds to space constraint 
+if an array is used instead of vector to store edges.
+>when storing user defined data type as key in map, operator < has to be overloaded
+==================================== template =============================================
+> in templates typename can be replaced with the keyword class
+> compiler replaces the templates just like macro, during the compilation time.
+> templates and static variables: http://www.geeksforgeeks.org/templates-and-static-variables-in-c/
+compiler creates a new instance of template function for every new data type. which means say suppose you created three variables, 2 of int type, and one of double type. then the int types would share one function, and a completely new function will be created for double variable
+>template specialization:: the declaration template<> is used for specialized template.
+say suppose you need one single function for data types int, float, doubl, short, however different function is required for data type char.
+For this case, we will use a specialized template as follows:
+template <class T> //for every other data type
+void sort(T arr[], int size)
+{
+    // code to implement Quick Sort
+}
+template <> //specialized for char data type
+void sort<char>(char arr[], int size)
+{
+    // code to implement counting sort
+}
+=============== composition, aggregation Association ==========================================================
+This section is required when question is asked like, how will u make the two classes communicate with each other, or passing data between classes.
+>Object Composition - the process of building complex object from simpler ones, eg. body is a composition of various organs and limbs, car is a composition of various parts such as engine, tyre, etc. In composition we create small object into the bigger ones and can call the API of small class directly. small objects cannot exist outside big ones. Responsibility of creation and deletion of parts/small object lies with body/big object.
+> Aggregation is more like Has-a relation, like person lives at an address, however many people can live at that address, also the address exists even if the person doesnt live there anymore. for aggregation we would typically use pointers, since it has to be saved beyond the life of the object.
+Here part belongs to more than one object, and whole object is not responsible for existence of part. In aggregation the small objects are first created independently and then referred in big object through pointers or reference. such that even if big object gets deleted, part object still exists.
+Composition should be preferred over aggregation as in aggregation it might lead to memory leak and body/big does not control creation of part.
+>Association: in association object is unrelated to object. Associated object can belong to multiple object simultaneously, and isnt managed by those objects.
+Just like two classes, each having pointer of each others object.
+>Data encapsulation: Bundling of data and their access functions together, eg. the get set methods
+>Abstraction: Hiding internal details, eg. sort
+>Data Hiding: Not giving access to internal data of object, by using various access modifiers such as private, protecteds
+============================== exception handling =======================================
+?? read about assert, cerr, exit
+> exception handling is preferred in constructors, as they have no way to return the result of operation, and even if the operation was unsuccessful, the object gets created.
+> A try block must have at least one catch block immediately following it, but may have multiple catch blocks listed in sequence. Once an exception has been caught by the try block and routed to a catch block for handling, the exception is considered handled, and execution will resume as normal after the catch block. Exceptions of fundamental types can be caught by value, but exceptions of non-fundamental types should be caught by const reference to avoid making an unnecessary copy.
+> throw need not be necessarily be placed directly under a try block. U can have a function inside try block which can throw exception, this is perfectly acceptable.
+>catch(...) this will catch exceptions of all unhandled data types
+> if ur throwing derived object, but in catch section, firstly u are catching base, then that will get executed, as derived is nothing but a base + something.
+>
+try{
+throw runtime_error("Bad things happened"); /*OR*/ throw bad_alloc("Too much memory");
+}
+ catch(exception &ex) //this is for catching all 21 types of exceptions
+ catch(bad_alloc &al) // for catching specifically bad_alloc
+ catch(runtime_error &run) //for catching specifically runtime_error
+{
+	cerr<<"Exception of type:"<<ex.what();
+}
+Do note, that what() is a virtual function defined in class exception. If you want ur own version of what then firstly inherit class exception, and provide ur own definition of const char * what (); 
+========================== smart pointers, move semantics ==================================
+> 
+=================================== others =============================================
+> a friend function doesn't really belong to its class, however it can be defined either inside or outside the class.
+If outside then do not use the scope resolution operator
+> it does not matter whether the friend function is declared in  private or public section of the class
+> you can initialize a static const data member right where it is declared no where else, however only condition is that it should be integral data type,
+and not user defined or string.
+>typeid(Object or object pointer).name() OR dynamic_cast<Class name and a *>object(); are both used for RTTI. for dynamic_cast to be usable, the class must compulsarily have atleast one virtual function.
+> The expression dynamic_cast<T>(v) converts the expression v to type T. Type T must be a pointer or reference to a complete class type or a pointer to void
+eg: Base *b = new Derived();
+    Derived *d = dynamic_cast<Derived*>(b);
+>C++ Storage classes and qualifiers like auto, extern, register, volatile, const, mutable
+>In order to set precision of floating point number in our program to 2, i.e. 2 numbers after the decimal point should be shown, to achieve thisin c++
+we do as follows:
+#include<iomanip>
+and include this cout: cout<<fixed<<setprecision(2);
+>Transform: http://www.geeksforgeeks.org/transform-c-stl-perform-operation-elements/
+>Functors: http://www.geeksforgeeks.org/functors-in-cpp/
+auto_ptr; unique_ptr, shared_ptr, weak_ptr
+> A function declared as const(just before the opening braces of the function), cannot modify any data member of the class.
+ However do note, that if you have created any object with const keyword, then you will be able to call only const functions.
+ Any call to non const member function will give compilation error. However const functions can be called by non const objects.
+>floor and ceil: #include<cmath>. floor(2.3) gives o/p 2, it rounds down to the closest integer 
+ceil will round it up to the closest integer. example ceil(2/3) gives o/p 3
+> function ellipses = funda of functions taking in variable number of arguments
+
+>Data Hiding in C++ : if derived class defines any functions which have been defined in base class, then all the base class funtions get hidden, even if the signature of the derived function is totally different. Inorder to call the Base one's I have to use scope resolution operator, eg: b.Base::print(); 
+> what NULL comparison is to integral data types, nullptr is to integral pointer types and bool
+http://www.geeksforgeeks.org/range-based-loop-c/
+benefits of initialization list:
+	>For initialization of non-static const data members
+	>For initialization of reference members
+	>For initialization of member objects which do not have default constructor
+	>parameterized constructor of base class can only be called using Initializer List
+	>

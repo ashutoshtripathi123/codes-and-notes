@@ -1,0 +1,178 @@
+var hits = []; //empty array
+var family = new Array(); //another way to create an array
+hits.push("something"); //this command will push the data within parenthesis in the array
+
+/*jshint multistr:true */
+var text = "Mumbai Bangalore Ashutosh, Pune Lucknow Zurich Ashutosh";
+var myName = "Ashutosh";
+var hits = []; //empty array
+
+for(var i=0;i<text.length;i++)
+{
+    if(text[i]==='A')
+    {
+        for(var j = i; j < i + myName.length; j++)
+        {
+            hits.push(text[j]);
+        }
+    }
+}
+
+if(!hits.length)
+{
+    console.log("Your name wasn't found!");
+}
+else
+{
+    console.log(hits);
+}
+
+=======================================
+var user = prompt("Your name").toUpperCase(); //or toLowerCase();
+converts user input to lower or upper, and then saves it to var user
+
+what are jagged arrays ?
+->arrays such as 1row has 2 elements, 2row has 1 element, 3rdrow has 3 elements i.e. rows are not of the same length
+
+
+example of creating an object in javascript:
+var phonebookEntry = {};
+
+phonebookEntry.name = 'Oxnard Montalvo';
+phonebookEntry.number = '(555) 555-5555';
+phonebookEntry.phone = function() {
+  console.log('Calling ' + this.name + ' at ' + this.number + '...');
+};
+
+phonebookEntry.phone();
+
+other example of an object: //literal notation
+var me = {
+    name: "ashu",
+    age: 27
+    };
+
+other way of creating an object is:
+var me = new Object();
+me.name = "ashu";
+me.age=27;
+
+.object having an array:
+var myObject = {
+  name: 'Eduardo',
+  type: 'Most excellent',
+  interests: [1,2]
+};
+
+how do u create object within object ?
+var friends = {};
+friends.bill = {};
+friends.steve = new Object(); //this is called as creating object using constructor
+
+One way of accessing the property of the object is dot operator, the other is
+using bracket notation, meaning:
+myObject.name === myObject["name"];
+The "" and [] are compulsary
+
+Custom Constructor:
+creating a new object using above technique is a tedious task, instead we can
+write one function, and just call it to create a new object with initialization done.
+
+function Person(name,age) {
+  this.name = name;
+  this.age = age;
+this.changeAge = function(newAge)
+{
+     this.age=newAge;
+};
+} //see no semi colon
+
+var bob = new Person("Bob Smith", 30);
+var susan = new Person("Susan Jordan", 25);
+
+var abc = function (){}; //will end with a semicolon
+function abc(){} // does not end with a semicolon
+-------------------------------------------------------------------------------
+var bob = {
+    firstName: "Bob",
+    lastName: "Jones",
+    phoneNumber: "(650) 777-7777",
+    email: "bob.jones@example.com"
+};
+
+var mary = {
+    firstName: "Mary",
+    lastName: "Johnson",
+    phoneNumber: "(650) 888-8888",
+    email: "mary.johnson@example.com"
+};
+
+var contacts = [bob, mary];
+
+then to add a new entry to the array, i can use the following trick:
+contacts[contacts.length]={ firstName: firstName, lastName: lastName, phoneNumber: phoneNumber, email: email };
+----------------------------------------------------------------------------------------------------------------------
+> how do u figure out, what is the datatype of a variable ?. since here everything is defined as var ..., there is a way to find if the variable
+is object, string, number, or function.
+eg: var aString = "string";
+console.log(typeof aString); //this will print string
+
+hasOwnProperty keyword:
+->say suppose if we have a situation, where we don't know whether a property is a part of that object or not, so how do we check it, its simple using hasOwnProperty.
+
+eg:
+var myObj = {
+    name:"ashu"
+};
+console.log( myObj.hasOwnProperty('name') ); // should print true
+console.log( myObj.hasOwnProperty('nickname') ); // should print false
+
+Printing all elements of an object:
+->If i want to print what all properties are there in  an object, i will have to use "in" keyword. example follows:
+var nyc = {
+    fullName: "New York City",
+    mayor: "Bill de Blasio",
+    population: 8000000,
+    boroughs: 5
+};
+
+for(var property in nyc)
+{
+    console.log(property); //this will print fullName, mayor, population, boroughs
+    console.log(nyc[property]);//this will print New York City, Bill de Blasio, 8000000, 5
+}
+
+How does it works: remember nyc.fullName = nyc["fullName"] = "New York City"
+this can also be writte as: var city = "fullName" ; which is = nyc[city]
+
+function Dog (breed) {
+  this.breed = breed;
+}
+var buddy = new Dog("Golden Retriever");
+buddy.bark = function() {
+  console.log("Woof");
+};
+buddy.bark();
+
+var snoopy = new Dog("Beagle");
+snoopy.bark(); //will throw an error
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+save the program 7.8 contact list 

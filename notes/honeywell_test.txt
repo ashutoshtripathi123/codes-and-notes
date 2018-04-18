@@ -1,0 +1,129 @@
+#include <iostream>
+
+using namespace std;
+
+class Test{
+    private:
+    int x;
+    public:
+    Test(int x=0){this->x = x;}
+    void change(Test *t){this = t;}
+    void print(){cout<<"x="<<x<<endl;}
+};
+
+int main()
+{
+    Test obj(5);
+    Test *ptr = new Test(10);
+    obj.change(ptr);
+    obj.print();
+    return 0;
+}
+
+=============================================================
+class Test{
+public:
+int i;
+Test(int i){
+    i = i;
+}
+};
+
+int main()
+{
+    Test m(5);
+    cout<<m.i;
+    return 0;
+}
+===========================================
+http://www.geeksforgeeks.org/data-structures-and-algorithms-set-30-2/
+http://www.geeksforgeeks.org/c-plus-plus-gq/function-overloading-2-gq/
+http://www.geeksforgeeks.org/gate-gate-cs-2013-question-7/
+
+==========================================
+#include <iostream>
+
+using namespace std;
+
+class Base
+{
+    public:
+    void f()
+    {
+        cout<<"base";
+    }
+};
+class Derived:public Base
+{
+    void f()
+    {
+        cout<<"Derived";
+    }
+};
+
+
+int main()
+{
+    Derived d;
+    d.Base::f();
+    return 0;
+}
+===================================================
+#include <iostream>
+
+using namespace std;
+
+class Base{};
+class Derived:public Base{};
+
+
+int main()
+{
+Base *bp = new Derived;
+Derived *dp = new Base;
+    return 0;
+}
+==================================================
+void fun(int *a)
+{
+    a = (int *)malloc(sizeof(int));
+}
+
+int main()
+{
+    int *p;
+    fun(p);
+    *p=6;
+    printf("%d\n", *p);
+    return 0;
+}
+=============================================
+http://www.geeksforgeeks.org/wide-char-and-library-functions-in-c/
+==============================================
+int main()
+{
+    int r, x=2;
+    float y=5;
+    r = y % x;
+    cout<<r;
+    return 0;
+}
+===============================================
+int main()
+{
+    int i;
+    int *pi = &i;
+    scanf("%d", pi);
+    printf("%d", i+5);
+    return 0;
+}
+====================================
+http://www.geeksforgeeks.org/operating-systems-set-3/
+=========================================
+http://www.geeksforgeeks.org/operating-systems-set-9/
+===========================================
+http://www.geeksforgeeks.org/operating-systems-set-13/
+============================================
+http://www.geeksforgeeks.org/maximum-sum-hour-glass-matrix/
+===============================================
+http://www.geeksforgeeks.org/rotate-ring-matrix-anticlockwise-k-elements/

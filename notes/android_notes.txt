@@ -1,0 +1,200 @@
+
+forums.bignerdranch.com.
+code style -> anonymous inner classes for listeners
+
+> by default activity layout defines 2 widgets, 1) relativeLayout, and the other is TextView.
+
+relative layout comprises of the whole page, we dont want it that way, i.e. our QuizActivity needs 5 layouts:
+1)a vertical layout
+2) a TextView
+3)a horizontal LinearLayout
+4)two buttons
+
+LayoutWidth, LayoutHeight:
+match parent = fill parent = full screen, as big as parent
+wrap content = as much as the content needs space
+android:layout_marginTop="15dp" >> leave space from the top
+android:centerHorizontal=true >> places ur widget in center, on horizontal axis
+android:layout_below="@+id/topTextInput" >> places ur widget below the widget with id = toptextInput
+
+
+LinearLayout inherits from a view subclass called as viewGroup. You use LinearLayout when u want to arrange your widget in a single column or row. Other subclasses of viewgroup are FrameLayout, TableLayout and RelativeLayout
+
+FrameLayout: Simplest of the ViewGroup. It doesnot arrange children in any particular order, instead child views will be arranged as per :
+	     android:layout_gravity. Also container group for holding fragments.
+
+GridLayout: row span = u tell the cell to take space of how many rows. similar description goes for column span as well.
+
+
+Padding:
+This attribute tells the widget to add specified amount of space
+
+android:text-
+string resource resides in a different xml file in resource called as strings.xml, if you want it to be hardcoded, do as follows:
+android:tex="True"
+But its a good idea to keep ur string at one place.
+do not delete the menu_settings from strings.xml
+
+android:drawableRight=@drawable/arrow_right & android:drawablePadding="4dp"
+android:contentDescription="Read out the content of the string, incase when ur using imageButton"
+
+To access a resouce in code, we use its resource id. The resource id of the layout can be accessed by:
+R.layout.activity_quiz
+Resource id for text widget will be: R.string.question_text
+These resource id's can be seen in the file R.java
+Now resource id is not generated for all widgets. If you want it to be generated for your widget, just include id attribute in its xml i.e. activity_quiz.xml.
+Since we are going to interact with our app using these buttons, they need IDs
+eg: there was no id for buttons, so we included android:id="@+id/true_button" 
+Notice the + sign in the values for android:id but not in the values for android:text. This is because we are creating the IDs and only referencing the strings.
+
+Wiring up the widgets to code is a two step process:
+>get references to the inflated view objects
+> set listeners on those objects
+
+Getting reference to the inflated view objects:
+mTrueButton = (Button)findViewById(R.id.true_button);
+The casting done to the return type of findViewById is compulsary.
+
+======================================For creating a dynamic interface, the activity has to be made in java and not xml file.================================
+eg. of creating a widget in java:
+Button redButton = new Button(this); //will have to do -> import android.widget.Button;
+redButton.setId(1); //we need to set the ID to the resource for it can be used elsewhere
+eg. of creating a new layout in java:
+RelativeLayout rl = new RelativeLayout(this); // will have to do -> import android.widget.RelativeLayout;
+rl.addView(redButton); OR rl.addView(redButton, buttonDetails); //adding button widget to the layout, this is done so that my layout has something to show
+setContentView(rl);
+removed setContentView to activity_main.xml from MainActivity.java, and instead placed setContentView(rl)
+
+>we're going to prepare a container, and put it at the place where we want, this is done by calling:
+relativeLayout.layoutParams buttonDetails = new relativeLayout.LayoutParams(...,...);
+userNameDetails.addRule(RelativeLayout.ABOVE, redButton.getId()); //this will place it above the redButton, thats why we need the ID
+buttonDetails.addRule(RelativeLayout.CENTER_HORIZONTAL); 
+
+//converting DP to PIXEL; its needed because set width API needs input only in pixel.
+//libraries needed for this are android.content.res.Resources; and android.util.TypedValues;
+Resources r = getResources();//can be used to fetch all device and app parameters or values.
+int px = (int) typedValues.applyDimension(TypedValue.COMPLEX_UNIT_DIP,200, r.getDisplayMetric());//DIP means, i want to perform operation related to DIP
+
+=============================================================================================================================================================
+
+android.graphic.color; //for importing and using colors
+
+Setting listeners:
+mTrueButton.setOnClickListener(new View.OnClickListener())
+{}
+
+> Resources like images kept in res/drawable automatically gets the resource id.
+> copy all ur images from source to local directory, do not link it
+
+> CTRL+F12 to rotate the screen on emulator
+
+> onTouchEvent gets called by default whenever the user touches the screen
+
+Search and study about anonymous inner class, Context from Java
+Definning an array in Java can be done using 2 techniques:
+1) datatype [] varName = new datatype[size];
+2) datatype [] varName = {var1, var2, ...};
+java.utils.array; //library has all the functions needed for searching, sorting, filling, etc.
+java.util.scanner; //for getting user input
+java.util.*;//all java libraries
+
+eg. of getting a user input:
+Scanner in = new Scanner(System.in);
+a = in.nextIn();// will get the user integer input, for float use in.getFloat and etc. for each and every data type
+
+
+There can be only one public class per source file.
+
+A source file can have multiple non public classes.
+
+The public class name should be the name of the source file as well which should be appended by .java at the end. For example : The class name is . public class Employee{} Then the source file should be as Employee.java.
+
+>Passing array to a function can be done as >> printArray(new int[]{3, 1, 2, 6, 4, 2});
+
+> The variable declared as final, is as good as constant. A final variable unitialised can be given
+value only in constructor.
+byte data type takes value from -28 to 128.
+> anything defined as protected is accessible to the entire package - eg. src is a package.
+> double.toString(doubt a), int.toString(int b), byte.toString(byte c) -> converts the input datatype to string.
+>Integer.parseInt(string) -> similarly converts a string to integer
+
+
+> we can never call onCreate or any other activity methods by ourselves. they are always overriden, and called on appropriate time by android.
+> android.util.Log has various log utilities. the one that we are going to use is:
+	public static int d(String Tag, String msg), where Tag=Class name; msg=ur message
+>an activity can have the following life cycles.-> onStart(). onPause(), onStop(), onResume(), onDestroy(). i CAN PUT Log.d() in all of these calls to see what state
+my app is in.
+
+>accessing the log when the application is running can be done by using LogCat. Find it at Window -> Show View -> Other... In the Android folder, find and select
+LogCat and click OK.
+(If you do not see any messages in LogCat, LogCat may be monitoring the wrong device. Select
+Window -> Show View -> Other... and open the Devices view. Select the device you are currently
+running on and then return to LogCat.)
+
+>whenever we rotate our device, the instance of activity class is destroyed, and a new one is created
+>every activity in the android application must be declared in the androidManifest.xml file. When ur creating ur project for the first time, the wizard
+adds it automatically. 
+
+Starting an Activity:
+> The simplest way to start an activity from another is by calling the API startActivity(Intent intent). This API will tell the activityManager to start 
+  the given activity.
+
+>An intent is an object that a component uses to communicate with the OS. Whenever u want to request the OS to do something, we use Intent. in this case,
+we are requesting the activityManager to create a new activity, so we use Intent(Context, class) where context is telling which package we can find the class object.
+and class is the activity that the activityManager should start.
+
+
+		                        call                  gives info abt cheat                       start
+			QuizActivity  ---------> newIntent()------------------------->activityManager -------------> cheatActivity after calling startActivity
+ 
+
+> if u find error ActivityNotFoundException that means u haven't declared ur activity in androidManifest.xml file.
+
+explicit and implicit intent:
+> when calling an intent with context and class info provided its called as explicit intent. however when u want to call some activity of some other application,
+then we use implicit intent.  
+
+
+> A fragment is a controller  obect that the activity can deputize to perform tasks. a fragment managing user interface will be called as UI Fragment.
+A fragment has its own view, which inflates from layout file. so that means it will have its own xml file, and java class compulsarily. an activity can have one or several fragments.
+eg: Tab based interface can be implemented using fragments.
+A fragment cannot display a view of its own on the screen, it needs to be listed in the activities hierarchy. 
+an activity provides a spot in its view, where the fragment can place its own view.
+
+> for compatibility with lower subclass, we subclassed fragmentActivity
+
+>the fragment lifecycle is managed by activity lifecycle, and not the OS.
+> two approaches of hosting the UI Fragment in an activity.
+ 1) add fragment to activity's layout. but this is not flexible, as activity's view = fragment's view.Its done using layout fragment
+2) adding fragment in activity's code. this offers true flexibility.
+
+
+> fragment transactions are used to add, remove, attach, detach fragments to the fragment list. They are the heart of how fragments are composed, recomposed to change
+screen runtime.
+
+> the onAttach(activity), onCreate(its public in fragments, unlike private in activity), onCreateView methods are called when we add a fragment to the fragmentManager.
+
+>getting fragment manager for pre honeycomb:
+FragmentManager fm = getSupportFragmentManager(); for post honeycomb, it should be getFragmentManager();
+
+> for storing the crimeList, we create a singleton class. The singleton class creates only one instance, and it exists in memory as long as the app is alive no matter 
+what its activity, fragment, or lifecycle state it is in. how do we create a singleton class ? simple by having a private constructor, and a get function.
+Having a context in singleton allows to start activities, access prj resource, app's private storage, etc.
+
+>You are not going to override onCreateView(…) or inflate a layout for
+CrimeListFragment. The default implementation of a ListFragment inflates a layout that
+defines a full-screen ListView, and you will use this layout for now.
+
+> SingleFragmentActivity.java is our generic abstract class, created for code reuse. since a lot of code is generic when creating a new activity.
+
+Whom does the ListView ask? It asks its adapter. An adapter is a controller object that sits
+between the ListView and the data set containing the data that the ListView should display.
+The adapter is responsible for creating the necessary view object populating it with data from the model layer returning the view object to the ListView
+
+ArrayAdapter knows how to work with ArrayList
+ArrayList is a java class, that supports ordered list of object of a given type, and methods for retriving adding and deleting elements.
+
+
+SingleFragmentActivity = CrimeActivity OR CrimeListActivity
+Since CrimeActivity AND CrimeListActivity has almost same generic code except for creation of new CrimeFragment, we can create an abstract class
+i.e. SingleFragmentAcitivity which can be used by both CrimeActivity AND CrimeListActivity

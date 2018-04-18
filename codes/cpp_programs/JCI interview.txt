@@ -1,0 +1,33 @@
+1. Static & dynamic linking
+2. Virtual mechanism & effect of access specifier on it - No effect as at run time no access specifier is present
+3. Semaphore & mutex internal implementation
+4. Uml diagram
+5. IPC mechanisms
+6. Oops 5 points - I told only 4
+7. Implement singleton pattern
+8. Any design pattern in current project
+9. Default methods provided by compiler - I told 4 but he asked for one more
+10. Combining C & C++ code what care must be taken ? 
+11. Structure padding & is it present in C++
+12. Diff between Structure & class
+13. Macro to get 2nd nibble from given number
+14. Difference between vector & arrays
+15. Questions on client server communication & synchronization
+16. Volatile in C
+17. Which compiler provided default implementations can be inherited
+18. Process creates 3 threads & dies immediately what will happen to those threads ? How it can be avoided 
+19. Need of virtual destructor 
+20. Vtable & Vptr
+21. Size of class having just hifour virtual function = 8 bytes, dont know why
+22. 
+
+
+Prepare Permanently -
+1. IPC mechanisms 
+2. Design pattern
+3. Complex Data structure
+4. Usage of mutex & semaphore
+5. Use of all major STL containers
+6. Use of template programming
+
+

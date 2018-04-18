@@ -1,0 +1,328 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP.
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+//this is called as template meta programming: http://www.geeksforgeeks.org/template-metaprogramming-in-c/
+#include<iostream>
+using namespace std;
+template<short N> class C
+{
+    private:
+    static C<N-1>c;
+    public:
+    static int const n = N*c.n;
+};
+
+template<> class C<0>
+{
+    public:
+    static int const n =1;
+};
+
+int main()
+{
+    cout<<C<5>::n<<endl;
+    return 0;
+}
+
+=============================================
+int main()
+{
+    int var1 = 84;
+    double var2;
+    cout<<sizeof(++var1 + var2);
+    cout<< var1;
+    return 0;
+}
+===============================================
+int main()
+{
+    int x = 7;
+    int *a = &x;
+    delete a;
+    cout << x << endl;
+    return 0;
+}
+===============================================
+which of the following can be used to avoid memory leaks
+===============================================
+#define compute(valA, valB) ((valA)>(valB)?(valA):(valB))
+=================================================
+#include<iostream>
+using namespace std;
+namespace A{
+    string a("a");
+    namespace B{
+        string b("b");
+        namespace{
+            string x("x");
+            namespace C{
+                string c("c");
+            }
+        }
+    }
+    namespace D {
+        string x("x");
+        namespace E{
+            string e = A::B::C::c;
+        }
+    }
+}
+
+int main()
+{
+    cout << A::D::E::e <<endl;
+    return 0;
+}
+===============================================
+constexpr keyword
+int main()
+{
+    double g = 10;
+    void *voit_ptr = &g;
+    int *ptr = (int *)voit_ptr;
+    int val = *ptr;
+    cout<<val<<endl;
+    return 0;
+}
+=============================================
+which are the following strong form of association:: options are Aggregation and Composition
+=============================================
+is function call an rvalue or lvalue
+=================================================
+#include<iostream>
+#include<functional>
+using namespace std;
+
+void Construction(function<void()>make)
+{
+    make();
+}
+
+int main()
+{
+   int room =300;
+   auto builder = [=, &room](){
+       room = 200;
+       room++;
+   };
+   
+   Construction(builder);
+   cout<<"Room:"<<room<<endl;
+    return 0;
+}
+=======================
+#include<iostream>
+#include<functional>
+#include<algorithm>
+#include<list>
+using namespace std;
+
+struct ScrapIt
+{
+    bool operator()(const int &n) const{
+        return n%3==0;
+    }
+};
+
+int main()
+{
+    list<int> container({25, 9,0,1,13,NULL,19});
+    cout<<container.size();
+    remove_if(container.begin(), container.end(), ScrapIt());
+    cout<<container.size()<<endl;
+    return 0;
+}
+=================================
+int main()
+{
+vector<int>sequence(1,5);
+for_each(
+    sequence.begin(),
+    end(sequence),
+    [](int i){cout<<i+i<<"\t";});
+    return 0;
+}
+========================================
+#include<iostream>
+#include<functional>
+#include<algorithm>
+#include<list>
+#include<vector>
+using namespace std;
+
+template<class T>
+void determine (T &i)
+{
+    cout << "First";
+}
+
+template<>
+void determine (const int &i)
+{
+    cout << "Second";
+}
+
+int main()
+{
+    int numero = 39;
+    determine(numero);
+    return 0;
+}
+==========================================
+int main()
+{
+    string vol_default{"Volume"}, vol_cube,vol_sphere,vol_cuboid;
+    vol_sphere = vol_default;
+    vol_cube = std::move(vol_default);
+    vol_cuboid = vol_default;
+    cout<<vol_default<<vol_cube<<vol_sphere<<vol_cuboid;
+    return 0;
+}
+===========================================
+int main()
+{
+    int container = 5, box = 15;
+    int *un, *duo;
+    un = &container;
+    duo = &box;
+    *un = 10;
+    *duo = *un;
+    un = duo;
+    *un = 20;
+    cout<<container<<endl;
+    cout<<box<<endl;
+    return 0;
+}
+==============================================
+template<class One, class Two, class Three=double>
+class CountAll{
+    One c;
+    Two b;
+    Three a;
+    static int sum;
+};
+
+int main()
+{
+    CountAll<int, int>a;
+    CountAll<double, double>b;
+    cout<<sizeof(a)<<sizeof(b);
+    return 0;
+}
+=====================================================
+template<typename T>
+T* silly(T const &x)
+{
+    T *p = new(T);
+    *p = x;
+    return p;
+}
+
+template<>
+int *silly<int>(int const &i)
+{
+    int *p = new (int);
+    *p = i-1;
+    return p;
+}
+
+int main()
+{
+    string s("Lucky Number ");
+    cout<<*silly<string>(s)<<*silly(7);
+    return 0;
+}
+======================================================
+void print(int n)
+{
+    if(n !=0)
+	{
+		print(n-1);
+		cout<<n<<endl;
+	}
+}
+
+int main()
+{
+    print(10);
+    return 0;
+}
+====================================================
+//using namespace std;
+
+int val1;
+
+int main()
+{
+  int val2;
+  ::val2 = 3;
+  std::cout<<val1 + ::val2<<std::endl;
+  val1 = 2;
+  goto print;
+  printed: if(val1 != 2 || val1 == 2 || val2 == 3 || val2 != 3)return 0;
+  print: goto printed;
+    return 0;
+}
+========================================================
+#include<numeric>
+#include<string>
+using namespace std;
+
+void display(int x)
+{
+    cout<<x<<"\t";
+}
+
+int main()
+{
+    int box[5]={0};
+    iota(box, box+5, 1);
+    int carton[5];
+    copy_n(box, 5, carton);
+    for(int n : carton)
+        display(n);
+    return 0;
+}
+====================
+struct Check{
+    Check(){cout<<"1";}
+    Check(const Check&){cout<<"2";}
+    ~Check(){cout<<"3";}
+};
+
+Check existence()
+{
+    return Check();
+}
+
+int main()
+{
+    existence();
+    return 0;
+}
+=====================================
+const int goal = 9;
+
+int main()
+{
+    enum execution{
+        goal = goal,
+        aim = goal,
+        target
+    };
+    
+    cout<<target;
+    return 0;
+}
+========================================
+mutable, double, volatile, const.
+which is not a storage qualifier
+===========================================
+which of the following pointer type has been depreceated in c++11
+auto_ptr, shared_ptr, unique_ptr,
+=============================================
+what do lambda expression achieve in c++

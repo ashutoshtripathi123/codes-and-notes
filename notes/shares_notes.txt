@@ -1,0 +1,85 @@
+#use CAGR to find the return value of ur investment
+#online trading academy mumbai, do check if u get time
+#never go against market trend, use a stop loss
+
+how to use a stop loss ?
+#You should prefer shares with a minimum price range of Rs 10. This means the average difference between a stock's intra-day high and intra-day low should be at least Rs 10
+
+#Stock Beta - Any stock with a positive beta of 1 or above is good. A beta of 1 means the stock will move in line with the market. If the market falls 2%, the stock will also fall 2%. "One can look at a maximum beta of 2 or 2.5, not more than that
+
+#Markets don’t like the RBI increasing the repo rates.Repo rate is the rate at which banks borrow from RBI
+
+#reverse repor rate means RBI borrowing from banks
+
+#The RBI meets every quarter to review the rates. This is a key event that the market watches out for. The first to react to rate decisions would be interest rate sensitive stocks across various sectors such as – banks, automobile, housing finance, real estate, metals etc.
+
+#CRR: banks have to keep some money with RBI. An increase here is also not good
+
+#Usually a low interest rate tends to increase the inflation and a high interest rate tends to arrest the inflation.
+
+#WPI(Wholesale price index) and CPI(Consumer price index)  tells about inflation
+#Index of Industrial Production (IIP)
+
+#technical analysis means finding the market trend.example people eating at a famous eatery among all the others.
+technical analysis needs 4 data sets which is OHLC, i.e. open, high low and close price for the day.candle stick charting is used for this
+
+sample case, say suppose some stock is falling for 4 consectuive days, however the stocks traded have reduced a lot, then there is a possibility,
+that the stock may bounce back into green on 5th day
+
+#a long or a short candle must be avoided as short doesnt really tells much abt direction, and placing stop loss is a problem for long candles
+#a marubuzo candlestick is bald, it just considers the open and close price. A risk averse generally buys shares, a day after the rally in any direction
+# spinning top is a "calm before the storm", it can go in any direction. Bet with only 50% of ur capacity in such a case.  spinning top candle shows confusion and indecision in the market with an equal probability of reversal or continuation. Until the situation becomes clear the traders should be cautious and they should minimize their position size.
+
+#umbrella pattern has body at the top, and longer lower shadow
+#if you find a paper umbrella at the end of the downward trend, its called as hammer pattern, then this means, it might go up. Keep the low of the hammer as the stop loss.
+#if paper umbrella appears at the top of the up trend, then its called as hanging man pattern.
+#colour does not matter in case of umbrella pattern
+#author prefers hammer over hanging man based on his experience
+#shooting star pattern has a long upper shadow, and in reality is just an inverted umbrella
+# shooting star is a bearish pattern; hence the prior trend should be bullish
+
+========================================================================================================================
+from video : Sky view trading channel, hebrownreport.com
+both call and put could be purchased, and sold.
+if u buy call, u want the market to go up, if u buy put, u want the market to go down.
+
+time decay in options, iron condors ?
+buying calls - bullish strategy
+buying puts - bearish strategy
+
+put option is like an insurance, you should buy put during results out time
+
+
+80---------------------100----------------------120
+(In the money)        (real price)        (out of the money)                
+
+
+(Chap3 of module 5 can be a good refresher, the bajaj example)
+strike price = price of the stock at which we bet
+underlying price = the actual price of the stock. for call to make money, underlying < strike, and underlying should grow upto strike
+Statistically the option seller has higher odds of winning in an typical option contract
+
+Exercising of an option contract happens only on the expiration day, never before
+
+Intrinsic value(IV) = spot price - strike price. It should always be +ve, else 0 in case of it being negative
+break even is achieved, i.e. no profit no loss, when
+spot price = strike price + premium paid
+
+# A call option buyer has a limited risk but unlimited profit potential.
+
+###In India all options are European in nature, so does this means, i cannot sell my options ??
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
