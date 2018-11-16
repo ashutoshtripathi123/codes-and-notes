@@ -15,8 +15,8 @@ int main()
 	map<int,int>::iterator itr;
 	
 	a1.insert(pair<int, int>(1, 10));
-	a1.insert(pair<int, int>(2,20));
-	a1.insert(pair<int,int>(3,30));
+	a1.insert(pair<int, int>(2, 20));
+	a1.insert(pair<int, int>(3, 30));
 	a1.insert(pair<int, int>(4, 40));
 	a1.insert(pair<int, int>(5, 50));
 	

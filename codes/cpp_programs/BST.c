@@ -173,6 +173,39 @@ void leftView(struct Node *head)
 }
 /************************************************************************/
 
+#if 0 /************** Check if the given tree is binary or not ****************/
+boolean check(Node n, int min, int max){
+	if(n==null)
+		return true;
+	if(n.data <= min || n.data >= max)
+		return false;
+	return check(n.left, min, n.data)
+		&& check(n.right, n.data, max);
+}
+
+    boolean checkBST(Node root) {
+        boolean result = check(root,Integer.MIN_VALUE,Integer.MAX_VALUE);
+        //System.out.println(Integer.MIN_VALUE+" "+Integer.MAX_VALUE);
+        return result;
+    }
+/************* least common ancestor problem ********************************/
+	public static Node lca(Node root, int v1, int v2) {
+        // Write your code here.
+        /*Idea is to find the last possible number, that fits between v1 and v2,
+        as this is a binary tree, so we can be sure that left<=node<=right*/
+        if(root.data < v1 && root.data < v2)
+        {
+            return lca(root.right, v1, v2);
+        }
+        else if(root.data > v1 && root.data > v2)
+        {
+            return lca(root.left, v1, v2);
+        }
+
+        return root;
+    }
+#endif
+
 int main()
 {
 	int op=1;

@@ -14,6 +14,8 @@ boolean i = "axe".equals("axe");//if using compareTo, change the data type of i 
 Random r = new Random(); //for random number generation
 int dice1 = 1+r.nextInt(6);//max random value can be 6, i.e.  it runs from 0 to 5, hence added 1
 String.valueOf(X): will be writing on window/GUI
+char[] ch = s.toCharArray(); //here 's' is a string, and this will convert string to character array
+
 
 > in java methods are virtual by default. They are made non-virtual by using keyword final. In java private methods
   by default are final and cannot be overriden
