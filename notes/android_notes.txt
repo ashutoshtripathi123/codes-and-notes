@@ -1,3 +1,6 @@
+If you're Nox player doesn't get connected with you're Android Studio, then do the following steps:
+C:\Users\Anjali>cd C:\Users\Anjali\AppData\Roaming\Microsoft\Windows\Start Menu\Nox
+C:\Users\Anjali\AppData\Roaming\Microsoft\Windows\Start Menu\Nox>Nox.lnk connect 127.0.0.1:62001
 ========== udemy notes ======================
 -> File->New->Module->Java Module. Then select package instead of project, and you will see your Java class
 -> new package can also be used to create folders in you're project
@@ -16,6 +19,8 @@
 -> another way is to do: trueButton.setOnClickListener(this); Click on red bulb, and implement the button onClick function.
    now this function can be used to listen to all the button clicks for all the buttons. Best approach if u have more than 1 button    
 -> Toast.makeText(getApplicationContext(),R.string.app_name, Toast.LENGTH_SHORT).show();
+-> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+-> snackbar is similar to toast, only difference is that it is linked to a view, and shows full line. its like toast 2.0
 -> goto res->values->colors.xml, add ur own myColor, for value type #CED, one rectangle will get drawn, use it for color options
 -> add uses permission in AndroidManifest file, to prompt user for what all permissions my app needs
 -> res->layout-> added a new layout. and added it in setContentView. Now my app on loading will show this layout
@@ -71,8 +76,45 @@ For saving in shared preferences, at the end, you need to do edit.apply() compul
 ============ Contact Manager App ===================
 -> For inserting into the map, we need something like a structure. we could have used a map, but ContentValues is recommended
 -> For reading from DB, we use Cursor, similar to iterator in c++
+   example:     Cursor cursor = db.query(Util.TABLE_NAME,
+                new String[]{ Util.KEY_ID, Util.KEY_NAME, Util.KEY_PHONE_NUMBER},
+                Util.KEY_ID +"=?",new String[]{String.valueOf(id)},
+                null, null, null);
+				if (cursor != null)
+					cursor.moveToFirst();
 -> =? means, the next parameter will is the input, and should be considered for match.
 -> res->layout->right click new layout resource file. we will create a new XML for each entry of the list.
+-> recyclerView is better than listView. one of the usecase is scrollable list
+with recyclerView you can even use animation/cardView etc. so this should
+always be preferred, and it also has a boost in performance.
+-> refer to this link for extra info on recyclerView: https://github.com/codepath/android_guides/wiki/Using-the-RecyclerView
+================== Baby Need App ======================
+-> we can include one xml into another by including the following line in parent xml:
+<include layout="@layout/content_main" />
+-> to create popup we need AlerDialog.Builder and AlertDialog, then do the following steps:
+        builder = new AlertDialog.Builder(this);
+        View view = getLayoutInflater().inflate(R.layout.popup, null);
+		builder.setView(view);
+        dialog = builder.create(); //Creating dialog object
+        dialog.show();
+-> to write into DB, we need to get its handler in writable mode, which is done as:
+    SQLiteDatabase db = this.getWritableDatabase();
+
+-> Lesson: if I have created a button in some other xml, then I cannot doa findViewById in onCreate of MainActivity
+   it has to be done somewhere else, after getting the view of the inflated xml
+-> Lesson: the order in which DB is created, the same order should be followed when accessing or insertinf values from DB
+           If you're making any change in that order, then change the DB version
+
+-> Whenever you want a delay, use this:
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        },1200);//1sec
+-> Baby need app was always opening with a new entry for popup, so as to avoid that, we changed the AndroiManifest file
+ manifest has the name of the class that should be executed first. so if we change that, and write some other class, then during the 
+ start of the application, that class will get executed.
 ===================================================================
 forums.bignerdranch.com.
 code style -> anonymous inner classes for listeners
@@ -152,6 +194,7 @@ buttonDetails.addRule(RelativeLayout.CENTER_HORIZONTAL);
 //libraries needed for this are android.content.res.Resources; and android.util.TypedValues;
 Resources r = getResources();//can be used to fetch all device and app parameters or values.
 int px = (int) typedValues.applyDimension(TypedValue.COMPLEX_UNIT_DIP,200, r.getDisplayMetric());//DIP means, i want to perform operation related to DIP
+
 
 =============================================================================================================================================================
 

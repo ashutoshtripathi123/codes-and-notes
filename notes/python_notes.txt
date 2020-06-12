@@ -97,8 +97,14 @@ for index, letter in enumerate(string):
 list_1 = [1,2,3,4]
 list_2 = ['a','b','c']
 
+for accessing any item in a list, i use indexing the same style used in array in C, example list_1[3] = 4
+also, list_1[-1] = 4, i.e. last item in the list
+
 for item in zip(list_1, list_2):
     print(item)
+	
+-> name = "ashutosh"
+print(name.title()) -> this will print "Ashutosh"
 ===========================================================================
 -> 'in' is the built in function, which would tell us, if something 
 exists inside a string, array, list or dictionary
@@ -132,22 +138,69 @@ details can be found on website
 
 -> sets hold unique elements
 -> sets and dictionary both hold values in {} braces
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+===================== edx ====================
+student_name = "Anjali"
+indexing from start of the string will be 0,1,2,3,4,5 and for reverse it will be -1, -2, -3, -4, -5, -6
+print(student_name[0], student_name[1]) -> A n
+-> range(10) -> this means range is 0 to 9. the number provided is the end of the range
+-> lists can be added to each other using extend() function, or they can be even added as done in numeric operation
+-> list can be revered using a .reverse() function
+-> sort(list_name.sort() is the syntax) and sorted(sorted(list_name) is the syntax) function
+-> longer string can be splitted into  shorter strings using split function (syntax = list_name.split())
+-> triple quotes ''' ''' preserve formatting such as spaces and line breaks
+	example: big_quote = """Jack and Jill went up the hill
+	To fetch a pail of water
+	Jack fell down and broke his crown
+	And Jill came tumbling after"""
+->to build a string from a list of strings, use join
+  example:  example1 = ['p','y','t','h','o','n']
+			noSpace = ''
+			example2 = noSpace.join(example1)
+-> to cast a string to list:
+	name = list("hello") #now name is a list
+-> print("Hello", end='*') -> default action for end is \n, which is why every print happens on new line.
+   so if you want to avoid printing on new line with something else, then define end 
+   
+======= file operation ========
+#opening a file
+poem_file = open('poem1.txt', 'r')
+#reading from a file
+poem_content = poem_file.read()
+#reading 10 character from a file
+poem_content1 = poem_file.read(10)
+#If you want to save a string as a list, then use readlines	function
+	poem1 = open('poem1.txt', 'r')
+	poem_lines = poem1.readlines()
+	poem_lines
+#to read each line separately from the file, its readline and not readlines
+poem_lines = poem_file.readline()
+for line in poem_lines:
+	print(line)
+#to remove the unnecessary new line character
+count = 0
+for line in poem_lines:
+    poem_lines[count] = line[:-1]
+    count += 1
+print(poem_lines)
+#close the file to free the memory
+poem1.close()
+#to remove leading and trailing white spaces, new lines, use strip()
+poem1 = open('poem1.txt', 'r')
+poem_line = poem1.readline().strip()
+while poem_line:
+    print(poem_line)
+    poem_line = poem1.readline().strip()	
+#strip with argument will just remove whatever is unwanted
+#example
+poem_line = poem1.readline().strip('\n')	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
