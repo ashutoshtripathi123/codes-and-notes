@@ -1,6 +1,11 @@
 #include<iostream>
 using namespace std;
-
+/*Protected access modifier is similar to private access modifier 
+ * in the sense that it can’t be accessed outside of it’s class 
+ * unless with the help of friend class, 
+ * the difference is that the class members declared as Protected 
+ * can be accessed by any subclass(derived class) of that class as well.*/
+ 
 class Derived; //Change required for forward declaration 
 class Base
 {
@@ -46,7 +51,7 @@ class Derived:public Base
 	{
 		cout<<"Constructor of Derived Called"<<endl;
 	}	
-	derivedModifyingBase()
+	void derivedModifyingBase()
 	{
 		//iAmPrivate=100; //it gives a compilation error. I cannot access any private member of even Base class from derived
 		iAmProtected=200;

@@ -12,7 +12,7 @@ public:
 	}
     virtual const char* getName() { return "Base"; }
 };
- 
+
 class Derived: virtual public Base
 {
 public:
@@ -42,5 +42,5 @@ int main()
     //cout<<base.abcd; //this is not possible, as its not defined in base
     cout<<base.getName()<<endl;
     //delete derived;
-    
+
 }

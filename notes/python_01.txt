@@ -1,0 +1,47 @@
+'in' keyword:
+in keyword can be used for parsing through the list or a range of numbers, for example:
+var list_item in item -> here item is a list
+
+'range' keyword:
+for i in range(2,14): i will take the value from 2 to 13
+
+'len' keyword:
+expenses = [100, 200, 300, 400, 500]
+length = len(expenses) -> this will give the size of expenses array. it can used as index in for loop
+
+using append to attach a new item to the list:
+a = list()
+a.append(1)
+a.append(2)
+a.append(3)
+
+For inserting values in a dictionary
+a = dict() ##this tells python interpreter that we are going to create a new dictionary 
+a[1] = 10
+a[2] = 20
+a[3] = 30
+
+break and continue can be used the same way as done in cpp
+
+-> For documenting help of a function, just type ''' or """ then press enter. automatically functions input and return type will be added,
+now you just need to add some text regarding what should be the value, and what it does
+
+-> for storing data in doctionary, we need key value pair.
+a dictionary is similar to Map, HashTable
+For retreving data from list, we use index, but in case of dictionary we use key 
+in dictionary order does not matter 
+eg: dic = {"ram":123, "sita":456}
+
+syntax for creating empty dictionary
+d1 = dict()
+
+-> tuples and string are immutable, i.e. they cannot be changed
+
+-> the finally block in the exception handling will get executed, even if exception is there or not
+
+How to know what all built in facilities I can use on example:
+a = [1,2,3]
+There is a command dir(a) -> on doing this it will print all the functionalites
+which can be performed on list
+
+

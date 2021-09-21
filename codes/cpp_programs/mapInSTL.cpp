@@ -8,6 +8,25 @@ using namespace std;
 
 //resource from: http://www.geeksforgeeks.org/map-associative-containers-the-c-standard-template-library-stl/
 #if 0
+//REMEMBER: map be default stores elements in ascending order
+int main()
+{
+    map<char, int>data;
+    data.insert(pair<char, int>('d', 40));
+    data.insert(pair<char, int>('a', 10));
+    data.insert(pair<char, int>('c', 30));
+    data.insert(pair<char, int>('b', 20));
+    
+    map<char, int>::iterator itr;
+    for(itr = data.begin(); itr != data.end(); itr++)
+    {
+        cout<<itr->first<<" "<<itr->second<<endl;
+    }
+}
+#endif
+
+
+#if 0
 int main()
 {
 	map<int,int> a1;
