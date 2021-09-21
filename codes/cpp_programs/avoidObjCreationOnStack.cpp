@@ -10,20 +10,21 @@ private:
 	~Test()
 	{
 		cout<<"Destructor Called !!!"<<endl;
+
 	}
-	
+
 	friend void deleteObj(Test *ptr);
 public:
 	Test(){
 		cout<<"Constructor Called !!!"<<endl;
 	}
-	
+
 	//not working yet
-	void operator delete(void *ptr)
+	/*void operator delete(void *ptr)
 	{
 		cout<<"Overloaded Delete Called"<<endl;
-		delete ptr;
-	}
+		free(ptr);
+	}*/
 };
 
 void deleteObj(Test *ptr)
@@ -35,8 +36,10 @@ void deleteObj(Test *ptr)
 int main()
 {
 	//Test t1; //This will give compilation error
-	Test *t1; 
-	t1 = new Test(); 
+	Test *t1, *t2;
+	t1 = new Test();
+	//t2 = new Test();
 	deleteObj(t1); //Calling friend function
-	delete t1; //not working yet
+	//delete t2; //overloading of delete operator works, only if the destructor is not private,
+	             //otherwise it is working fine
 }

@@ -1,0 +1,70 @@
+INT_MIN is a macro present in #include<climits> which contains the maximum negative value
+multiplication of 2 prime numbers give a unique result, which cannot be formed by multiplication of other numbers
+
+============ trie data structure =============
+you would have noticed we are doing:
+int index = arr[i] - 'a'
+its because 'a' in ascii has value 48, so if we want to assign an index to it i.e. 0 while storing it in array, we need to subtract 48 from it.
+as we cannot have an array like arr['a'] as the index should be a number, we are doing this. If you dont want to do this, then use a map
+============ tree data structure =============
+-> depth of node x = length of path from root to x, or no. of edges in path from root to x
+-> height of x = no. of edges in longest path from that node x to a leaf
+-> balanced binary tree = difference between height of left sub tree and right sub tree is not more than 'k' (mostly 1)
+-> another alternative for storing balanced binary tree other than dynamic memory is storing it in array:
+   so, how do you know, who is the child of shom. by this simple formula:
+   left-child = 2i +1
+-> Level order traversal of a tree is breadth-first traversal for the tree   
+=================== strings =====================
+If the question is, given a string of length 'n', find the number of DISTINCT substring possible, then the formula is (n*(n-1))/2
+For all the possible substring, the formula is n*(n+1)/2
+================== permutation and combination =====================
+given n items, k items have to be selected where sequence or order does not matter, no replacement, then the formula is:
+((n+k-1)/k).
+eg: n=4, k=3
+=================== map ================
+MAP by default stores elements in ascending order 
+================ linked list ============
+if I need to use linked list in my code, then use list<int> instead of declaring the structure, doing memory allocation and all that 
+ready made utility is available in c++
+=============== heap ==================
+-> a heap is a complete binary tree 
+-> heap is of 2 types: min heap, max heap
+-> application : 
+-> While creating heap, we first fill the left child then right. 
+============ priority_queue ======================
+-> priority_queue is a special queue that stores elements in increasing order. all insert, and delete will lead to realignment of elements such that order is maintained
+by default priority_queue is descending order, to use priority_queue as ascending order, certain changes are required in logic.
+Please go through the sample code
+================ set ======================
+in set each element has to be unique, and the content cannot be modified once it has entered the set.
+by default elements in set are stored in ascending order.
+syntax: set<int>s1;
+To store the elements in descending order:
+set<int, greater<int>>s2;
+to insert: s1.insert(10);
+To remove: s2.erase(50);
+================ deque ====================
+deque is a double ended queue, where insertion and deletion happens at both the ends.
+SYntax is as follows:
+    deque <int> gquiz;
+    gquiz.push_back(10);
+    gquiz.push_front(20);
+    gquiz.push_back(30);
+    gquiz.push_front(15);
+	gquiz.pop_front();
+	gquiz.pop_back();
+============= list ======================
+list<int>l1 is a double linked list insertion deletion happens at both ends 
+	
+
+
+
+
+
+
+
+
+
+
+
+

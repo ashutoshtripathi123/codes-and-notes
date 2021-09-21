@@ -121,6 +121,24 @@ the one which is default.
 this is the reason why operator << cannot be overloaded using member function technique
 =========================================== vector ============================================
 >vector elements are placed in contagious locations, so that it can be accessed using iterators
+========================================== string =============================================
+
+// to fetch one digit from string at a time:
+string input = "123";
+for(int i=0; i< input.size(); i++)
+{
+	char digit = (int)(input.at(i));
+	int ia = digit - '0';
+	reminder = reminder + ia;
+}
+
+//for string to number:
+string input = "12345";
+int number = stoi(input);
+
+// for number to string::
+int number = 12345;
+string input = to_string(number);	
 ========================================= STL =================================================
 STL has 4 components: Iterators, Algorithms, Containers, and Functions
 Algorithms: Searching, Sorting, etc.
@@ -129,6 +147,18 @@ Sets are a type of associative containers in which each element has to be unique
 If asked when will u use a vector over an array. Give them a classic example of graphs, where it is unnecessary and adds to space constraint 
 if an array is used instead of vector to store edges.
 >when storing user defined data type as key in map, operator < has to be overloaded
+-> MAP by default stores elements in ascending order 
+-> in set each element is unique because that element identifies itself. The value of the element once inserted in set, cannot be modified
+   Bydefault elements are stored in ascending order in set. to store in descending order, we need to define the set as set<int,greater<int>>gquiz1
+-> lower_bound in set: The function returns an iterator pointing to the element in the container which is equivalent to k passed in the parameter. In case k is not present in the set container, the function returns an iterator pointing to the immediate next element which is just greater than k. If the key passed in the parameter exceeds the maximum value in the container, then the iterator returned is equivalent to s.end()
+-> upper_bound() is a built-in function in C++ STL which returns an iterator pointing to the immediate next element which is just greater than k. If the key passed in the parameter exceeds the maximum key in the container, then the iterator returned points to next of last element (which can be identified using set end() function) in the set container.
+in short lower_bound means the bottom should be either 'key' or the next available number greater than 'key'
+upper_bound means the top should be either 'key' or next greater than 'key'
+-> vector:: assign() is an STL in C++ which assigns new values to the vector elements by replacing old ones. It can also modify the size of the vector if necessary.
+example:     
+    vector<int> v;
+    v.assign(7, 100); //after this size of vector becomes 7, all initialized to 100. It was used in matrix problem, where we need to do allocation inside 
+-> STL also has list which is nothing but double linked list 
 ==================================== template =============================================
 > in templates typename can be replaced with the keyword class
 > compiler replaces the templates just like macro, during the compilation time.
@@ -212,3 +242,5 @@ benefits of initialization list:
 	>For initialization of member objects which do not have default constructor
 	>parameterized constructor of base class can only be called using Initializer List
 	>
+================================== threads =============================
+	
