@@ -1,0 +1,60 @@
+-> libraries to be used Numpy, Pandas, matplotlib, statsmodel, sklearn, etc.
+-> we need anaconda python distribution. goto anaconda prompt there are 2 installers available for installing a library and it is pip and conda
+-> work in  a new virtual environment by default anaconda provides (base) environment 
+#conda create --name quant python=3.8 -> for creating a new environment 
+#conda activate quant 
+#conda deactivate
+#conda info --envs -> this is to get the list of envs installed in our system 
+#conda install pandas==0.24.1 -> for specifying exact version to be installed    
+-> so now after activating quant I install any library using pip then that library will be installed in quant environment only.
+-> we installed spyder IDE inside quant environment
+-> yfinance will be used for getting data from yahoo finance instead of pandas data reader as it is no more supported 
+-> instead of hardcoding date we will use the library datetime   
+-> Pandas DataFrame will be used a lot, hence familarize yourself with it 
+->Format of yfinance.download is ::: 
+  yfinance.download("ticker code", start="", end="", interval="")
+-> yahoofinancial is another alternative to yfinance.
+   its better to have alternatives as we do not know when it will get unsupported
+-> yahoofinancial uses web scrapping instead of using the API's provided by yahoo 
+-> the granularity in yahoofinancial is at the atleast 1D, so it cannot be used to obtain intraday data 
+->strftime converts datetime object into a string
+-> DataFrame is a 2-dimensional heterogenous data type holder. pass it any idctionary, and it will arrange the data where columns will be keys, and values will form row 
+
+-> alpha vantage is another website which provides free data, it even provides technical indicators. however unlike yfinance we need API key to use this 
+-> Welcome to Alpha Vantage! Your dedicated access key is: BVR2LVGG6HZTJ1VJ. Please record this API key at a safe place for future data access.
+-> it has tons of data, but there is one problem, we cannot make more than 5 calls per minute, which means we cannot fetch data in one short for 10 or more tickers.
+to address this problem, we wont use the API's provided by them, instead we will use a alpha vantage wrapper developed by RomelTorres 
+https://github.com/RomelTorres/alpha_vantage
+rolling mean = moving averages 
+
+-> in stock market, we do not look at the stock price, but what we look at is daily return REMEMBER THIS
+-> most technical indicators are lagging indicators - used to confirm trends 
+-> typically TI are used in conjunction with other TI 
+-> in finance standard deviation is the proxy or alias of volatility 
+-> ADX is Average Directional Index - it tells about the trend. if less than 25 then false trend, and anything above that is good as high as it goes 
+-> coding renko is difficult, so we will use a library which is already present in    
+   github:https://github.com/ChillarAnand/stocktrends
+->talib is a technical analysis library everything is precoded here.
+it has an important function called as pattern recognition, which is widely used by traders everyday.
+its not very accurate, Sir doesnt use it https://mrjbq7.github.io/ta-lib/
+-> CAGR = Cummulative Annual Growth Rate 
+-> to annualize daily volatility multiply with sqrt(252) - typically there are 252 trading days in a year   
+-> to annualize weekly volatility multiply with sqrt(52) - there are 52 trading weeks in a year 
+-> to annualize monthly volatility multiply with sqrt(12) - there are 12 trading months in a year
+
+sharpe ratio : is widly used in finance industry. it tells the average return earned in excess of the risk free rate per unit of volatility
+sharpe ratio = (expected return - risk free return)/std deviation of asset return 
+sortino ratio = (expected return - risk free return)/std deviation of negative return
+highest drawdown = Difference between the highest high and the lowest low during the time holding asset 
+calmar ratio = CAGR/maximum drawdown 
+
+
+
+
+
+
+
+
+
+
+

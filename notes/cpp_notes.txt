@@ -65,7 +65,9 @@ if we have a derived dynamic object, and a base pointer pointing to derived obje
 > destructors can be declared in private section, however the same condition of private constructors are applicable in that case.
 Conditions such as I cannot create a direct object, or delete an object which has a memory allocated, because in that case, compiler calls destructor,
 and our class has destructor in private section. It is done in case when I want to conrtol deletion of objects. A friend function is useful in that case.
-
+->sorting an array 'a' in c++ having N elements
+sort(a,a+N) -> for sorting in ascending order
+sort(arr, arr+n, greater<int>()); -> for sorting in descending order 
 ==========================================================================================================
 > e.g., = rather than strcpy() for copying and == rather than strcmp() for comparing) can be used in cpp
     unordered_map<int, int> m;
@@ -77,6 +79,8 @@ Here's the link: http://www.geeksforgeeks.org/tuples-in-c/
 
 If you have a vector<int> ar //this is similar to ArrayList in Java, and you want to sort this in reverse order then:
 sort(ar.rbegin, ar.rend); //this will sort the array
+-> for inserting into the map: data.insert(pair<int, int>(1,2));
+-> for finding a value in map: map<int, int>::iterator ir = map.find(<key value>); if (ir != data.end()) this means it found the value
 ========================= static =====================================
 >static functions or variables in c++ can be called even without creating objects
 >static variables need to be initialized outside the class compulsarily, like this=> int Something::s_value = 1; where s_value is a static int variable, private or public doesn't matter, and int Something:: getNextValue(){return s_value;}

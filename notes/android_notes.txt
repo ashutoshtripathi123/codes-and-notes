@@ -1,4 +1,132 @@
+If you're Nox player doesn't get connected with you're Android Studio, then do the following steps:
+C:\Users\Anjali>cd C:\Users\Anjali\AppData\Roaming\Microsoft\Windows\Start Menu\Nox
+C:\Users\Anjali\AppData\Roaming\Microsoft\Windows\Start Menu\Nox>Nox.lnk connect 127.0.0.1:62001
+========== udemy notes ======================
+-> File->New->Module->Java Module. Then select package instead of project, and you will see your Java class
+-> new package can also be used to create folders in you're project
+-> type psvm, and it will expand to public static void main(), and psfi to expand it to public static final int. Similarly for psfs for string
+-> when declaring a float, append a 'f' to differentiate it with double
+-> largest number a byte can hold is 127. a short is twice the size of byte
+-> System.out.println(class object); //prints the address of the object
+-> Alt+Insert, and you can auto generate the constructor, getter and setter
+-> CTRL+SHIFT+/ => can be used for multiple lines commenting
+->sout + TAB -> for System.out.println();
+-> if you override toString function, you can just pass object, and print whatever you want, i.e. all required attribute of the class
+   to do this: Alt+Insert, select toString, voila
+-> all classes inherit from Object
+-> One more alternate to OnClickListener is to make an entry in the xml, i.e. android:onClick=<some function name>
+   and create this function in you're class file
+-> another way is to do: trueButton.setOnClickListener(this); Click on red bulb, and implement the button onClick function.
+   now this function can be used to listen to all the button clicks for all the buttons. Best approach if u have more than 1 button    
+-> Toast.makeText(getApplicationContext(),R.string.app_name, Toast.LENGTH_SHORT).show();
+-> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+-> snackbar is similar to toast, only difference is that it is linked to a view, and shows full line. its like toast 2.0
+-> goto res->values->colors.xml, add ur own myColor, for value type #CED, one rectangle will get drawn, use it for color options
+-> add uses permission in AndroidManifest file, to prompt user for what all permissions my app needs
+-> res->layout-> added a new layout. and added it in setContentView. Now my app on loading will show this layout
+-> java->com.example.activitylifecycle->right click->new->activity->empty activity. for one more activity/screen
+lifecycle of an android app: onCreate, onStart, onResume, onPause, onStop, onDestroy
+We need to override these functions to access these states, Alt+Insert->override methods->select onPause
+-> when adding a plain text, you can even add hint, but after removing the default text
+-> Intent is to be used when from one activity you want to go to another activity.
+   Intent intent = new Intent(MainActivity.this, ShowGuess.class);//from class this, to class that
+   startActivity(intent);
+   startActivityForResult(intent, REQUEST_CODE); //if you are expecting any result back from the second class 
+-> we can also send data from MainActivity class, by appending data to intent, example:
+   intent.putExtra("guess", "Hello There"); and it can be received in ShowGuess class as:
+   String value = getIntent().getStringExtra("guess");
+-> but say suppose from MainActivity you are sending many strings, and integers, in that case its better to keep a bundle in receiving class as:
+   Bundle extra = getIntent().getExtras();
+   and retrieve everything thind like:
+   extra.getInt("age"), or extra.getString("name")
+   Remember, the procedure to send from MainActivity still remains the same i.e. intent.putExtra(key and value)
+-> once the work of the second activity is done, it is better to call finish() at the end of the activity function
+-> if you want to send data from second activity to first, then remember to do the following in second class:
+	Intent intent = getIntent();
+	intent.putExtra("message_back", "From Second Activity");
+	setResult(RESULT_OK, intent);
+    and in the receiving class, override onActivityResult to get the result back. Use the same request code
+	used when we called startActivityForResult
+-> volley - to communicate with the web. add the following in gradle scripts->build.gradle(module:app) in dependencies:
+	implementation 'com.android.volley:volley:1.1.1'
+	another way to add it is: File->Project Structure->Dependencies->Apps->Add/Delete Library 
+*** Since we are fetching data from Internet, don't forget to add this to the AndroidManifest file:
+<uses-permission android:name="android.permission.INTERNET"/>
+-> "MainActivity.this" or "this" is same as this.getApplicationContext()
+-> for saving user information we have 3 types to do it: Text File, Shared Preferences, Database
+for smaller piece of data used shared preferences
+For saving in shared preferences, at the end, you need to do edit.apply() compulsarily
+-> since in android shared Preferences is stored as xml on disk, it is required to provide an id to it
+-> to see that shared preferences is working in our app, input some value, press the button, clear the app, and start it again.
+   you should see that same value being retained
+   These shared preferences are stored as map, and can be seen in Device Folder->Data->Data->app-><you're app>->shared_prefs
+======= Tivia App ======
+-> we created folders in our project to keep the files in an organized way by app->java->com.app.tivia->right click->new->package
+-> while creating AppController class, we gave super class as android.app.Application, because we want it to override certain methods of class Application
+-> For TAG in debugs better to use this: <class name>.class.getSimpleName();
+-> we added android:name=".Controller.AppController" in AndroidManifest, to tell Android that this class will govern the whole app,
+   and should be available across
+->What was the need to create an interface callback AnswerListAsyncResponse, and call it from MainActivity.java
+  its simple. Accessing Internet to get data can be slow, can happen in the background, and meanwhile we can 
+  proceed with our other stuff. With this callback mechanism, we assure that once it has got all its data, give it back 
+  to the callback declared
+-> animation can be created either through code or xml
+   In res, right click, resource folder, and select anim 
+   Inside anim folder, right click, new, Animation resource file 
+============ Contact Manager App ===================
+-> For inserting into the map, we need something like a structure. we could have used a map, but ContentValues is recommended
+-> For reading from DB, we use Cursor, similar to iterator in c++
+   example:     Cursor cursor = db.query(Util.TABLE_NAME,
+                new String[]{ Util.KEY_ID, Util.KEY_NAME, Util.KEY_PHONE_NUMBER},
+                Util.KEY_ID +"=?",new String[]{String.valueOf(id)},
+                null, null, null);
+				if (cursor != null)
+					cursor.moveToFirst();
+-> =? means, the next parameter will is the input, and should be considered for match.
+-> res->layout->right click new layout resource file. we will create a new XML for each entry of the list.
+-> recyclerView is better than listView. one of the usecase is scrollable list
+with recyclerView you can even use animation/cardView etc. so this should
+always be preferred, and it also has a boost in performance.
+-> refer to this link for extra info on recyclerView: https://github.com/codepath/android_guides/wiki/Using-the-RecyclerView
+================== Baby Need App ======================
+-> we can include one xml into another by including the following line in parent xml:
+<include layout="@layout/content_main" />
+-> to create popup we need AlerDialog.Builder and AlertDialog, then do the following steps:
+        builder = new AlertDialog.Builder(this);
+        View view = getLayoutInflater().inflate(R.layout.popup, null);
+		builder.setView(view);
+        dialog = builder.create(); //Creating dialog object
+        dialog.show();
+-> to write into DB, we need to get its handler in writable mode, which is done as:
+    SQLiteDatabase db = this.getWritableDatabase();
 
+-> Lesson: if I have created a button in some other xml, then I cannot doa findViewById in onCreate of MainActivity
+   it has to be done somewhere else, after getting the view of the inflated xml
+-> Lesson: the order in which DB is created, the same order should be followed when accessing or insertinf values from DB
+           If you're making any change in that order, then change the DB version
+
+-> Whenever you want a delay, use this:
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        },1200);//1sec
+-> Baby need app was always opening with a new entry for popup, so as to avoid that, we changed the AndroiManifest file
+ manifest has the name of the class that should be executed first. so if we change that, and write some other class, then during the 
+ start of the application, that class will get executed.
+ -> startActivity(new Intent(ListActivity.this, ListActivity.class));
+    since we are starting same activity from self, we need to finish the previous instance, hence we call finish() function after this call
+	finish() is also called in case if you want to finish the present activity and start a new one
+-> to get the position of pointer, we use getAdapterPosition()
+	this will tell where user has clicked, and then we can fetch the item like this:
+	int position = getAdapterPosition();
+	Item item = itemList.get(position);
+-> If you are updating the Database, then the view requires to be updated too to show the change,
+For this, call either of these functions:
+notifyItemRemoved(getAdapterPosition());
+notifyItemChanged(getAdapterPosition(), item);
+===================================================================
 forums.bignerdranch.com.
 code style -> anonymous inner classes for listeners
 
@@ -16,6 +144,9 @@ wrap content = as much as the content needs space
 android:layout_marginTop="15dp" >> leave space from the top
 android:centerHorizontal=true >> places ur widget in center, on horizontal axis
 android:layout_below="@+id/topTextInput" >> places ur widget below the widget with id = toptextInput
+android:orientation="horizontal/vertical". for example by default linear layout places everything side by side. by changing
+orientation to vertical, it places everything column wise
+android:textSize="15sp" //for text we use sp and not dp
 
 
 LinearLayout inherits from a view subclass called as viewGroup. You use LinearLayout when u want to arrange your widget in a single column or row. Other subclasses of viewgroup are FrameLayout, TableLayout and RelativeLayout
@@ -75,6 +206,7 @@ buttonDetails.addRule(RelativeLayout.CENTER_HORIZONTAL);
 Resources r = getResources();//can be used to fetch all device and app parameters or values.
 int px = (int) typedValues.applyDimension(TypedValue.COMPLEX_UNIT_DIP,200, r.getDisplayMetric());//DIP means, i want to perform operation related to DIP
 
+
 =============================================================================================================================================================
 
 android.graphic.color; //for importing and using colors
@@ -101,7 +233,6 @@ java.util.*;//all java libraries
 eg. of getting a user input:
 Scanner in = new Scanner(System.in);
 a = in.nextIn();// will get the user integer input, for float use in.getFloat and etc. for each and every data type
-
 
 There can be only one public class per source file.
 
@@ -194,6 +325,8 @@ The adapter is responsible for creating the necessary view object populating it 
 ArrayAdapter knows how to work with ArrayList
 ArrayList is a java class, that supports ordered list of object of a given type, and methods for retriving adding and deleting elements.
 
+RecyclerView has replaced adapterView or listView as it has lot of performance improvement.
+it is more customizable, hence prefer to use RecyclerView instead of listView
 
 SingleFragmentActivity = CrimeActivity OR CrimeListActivity
 Since CrimeActivity AND CrimeListActivity has almost same generic code except for creation of new CrimeFragment, we can create an abstract class
