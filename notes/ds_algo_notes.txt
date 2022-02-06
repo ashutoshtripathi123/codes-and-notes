@@ -17,10 +17,20 @@ as we cannot have an array like arr['a'] as the index should be a number, we are
 =================== strings =====================
 If the question is, given a string of length 'n', find the number of DISTINCT substring possible, then the formula is (n*(n-1))/2
 For all the possible substring, the formula is n*(n+1)/2
+For searching for a character in string
+example:
+string str = "abcd"
+char c = 'a'
+if (str.find(c) != string:npos)
+	cout<<"String has been found"<<endl;
 ================== permutation and combination =====================
 given n items, k items have to be selected where sequence or order does not matter, no replacement, then the formula is:
 ((n+k-1)/k).
 eg: n=4, k=3
+=================== vector =============
+initialize a vector from a set:
+set<int>s= {1,2,3};
+vector<int>v(s.begin(), s.end());
 =================== map ================
 MAP by default stores elements in ascending order 
 =============== heap ==================
@@ -41,6 +51,7 @@ set<int, greater<int>>s2;
 to insert: s1.insert(10);
 To remove: s2.erase(50);
 To search: if (data.find(nums[i]) != data.end())
+to erase after searching: s1.erase(s1.find(50))
 ================ deque ====================
 deque is a double ended queue, where insertion and deletion happens at both the ends.
 SYntax is as follows:
@@ -83,7 +94,8 @@ use the sliding window approach, where whenever we add a new array item to the s
 -> remove nth node from the end of the linked list. To solve this problem we created a dummy node at the beginning of the LL.
 this seems to be a very common approach. Do refer to this one on leetcode 
 
-
+-> Given two strings str1 and str2 and below operations that can be performed on str1. Find minimum number of edits (operations) required to convert ‘str1’ into ‘str2’ = Levenshtein distance. this is basically converting str1 to str2. test case could be dictionary on cell phone, where ont typing
+ the software checks how closer you are to a particular word 
 
 
 

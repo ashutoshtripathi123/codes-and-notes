@@ -1,0 +1,266 @@
+python notes from udemy:
+-> for power operation, we need to use * two times:
+ eg: 2**2 = 4
+-> a = 2
+-> b = 'that'
+c = str(a) + b
+#inorder to concat two different data types, we need to convert it to same types
+->type(a) -> <class 'int' > it will show the data type of a, which in our case will be integer 
+-> string can be defined using single or double quote. now when to use single or double quote ?
+   "this isn't end" -> in this example we require a single quote inside the string, so better to declare the complete
+   string in double quote.
+same applies vice-versa example: 'you said "WHAT" '
+
+For finding length of string:
+x = 'Hi There America'
+len(x) -> 16
+and x[9] = 'A'
+x[9:16] = 'America'
+x[1:5:2] = 'iT' #meaning start from position 1, go upto position 5, however take every 2nd element
+x[0:-5] = 'Hi There Am' #Meaning come in reverse order, leave last five
+String is immutable-> meaning, I cannot change one of the character inside the string
+x[0:] = 'Hi There America' #If you do not provide end position, then by default python will take the end of string
+s = x[1:]
+b = 'z'
+d = b + s
+d = 'zi There America' #for changing a variable in the string, you will have to do something like this
+
+x = 'This is the end'
+x.upper() -> built in function which returns x in all upper. however it will not modify x in itself
+similarly some of the built in functions are: lower, split
+
+x = 3.841234455676879
+round(x,2) -> this will print 3.84
+round(x) -> this will print 4
+=========================
+def name_func(x):
+    print('This is name_func')
+    # return 'Some returning string' #example of returning a string
+    return x * x
+
+
+var_str = name_func(2)
+print(var_str)
+
+
+def help_func():
+    """ Some Help Menu"""
+
+help(help_func)  # This is for writing some helpful comments
+#######################Variable argument function#####################
+# write a function which accepts variable list of arguments
+# args is a keyword, and so is kwargs
+#args is used for tuple, and kwargs is for dictionary
+#example implementation can be seen in print and quit function.
+def variable_arg_func(*args):
+    return (sum(args))
+
+
+print("Sum is ", variable_arg_func(1, 2, 3, 4))
+
+
+####################if-elif-else################################
+x = 10
+if x > 100:
+    print('x is greater than 100')
+elif x > 50:
+    print('x is greater than 50 but less than 100')
+else:
+    print('x is less than 50')
+################# for/while loop ########################
+
+item = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+for item_var in item:
+    print('This is the number:', item_var)
+
+string = 'A quick brown fox jumps'
+for var_letter in string:
+    print(var_letter)
+
+x = 0
+while x < 5:
+    print('Printing x', x)
+    x += 1
+# pass is a keyword which is similar to break
+
+################### built in functions ########################
+# I can even provide a step, i.e. range(3,14,2), remember this is a function
+for y in range(3, 14):
+    print(y)
+
+#generate enum for string
+string = 'A quick brown fox jumps'
+
+for index, letter in enumerate(string):
+    #print(index) #this will return tuple if I remove letter from above for condition
+    print(index)
+    print(letter)
+
+#zip function works in reverse of enumeration, it merges lists, and uses number from list_1
+#i can use as many lists i want to be inserted in a tuple
+list_1 = [1,2,3,4]
+list_2 = ['a','b','c']
+
+for accessing any item in a list, i use indexing the same style used in array in C, example list_1[3] = 4
+also, list_1[-1] = 4, i.e. last item in the list
+
+for item in zip(list_1, list_2):
+    print(item)
+	
+-> name = "ashutosh"
+print(name.title()) -> this will print "Ashutosh"
+===========================================================================
+-> 'in' is the built in function, which would tell us, if something 
+exists inside a string, array, list or dictionary
+
+===============================
+->lots of libraries are available in python, which can be used for doing various jobs.
+goto cmd
+$pip install colorama
+$python
+>>from colorama import init
+>>print(Fore.GREEN + 'Change the prompts color to green')
+## After this everything appears in green
+-> Modules can be explored on pypi.org 
+================================== create your module and package ============
+-> module is nothing but a file. You can refer to module.py and calling_module.py 
+to understand
+-> package is a collection of modules.
+-> a package file is differentiated by having a new __init__.py file
+
+->__name__ and __main__ is used to find if the file is imported or not
+Check one.py and two.py file for example
+
+-> global keyword can be used to define variable as global. no need to mention it at top of the file.
+syntax $ global some_variable
+
+-> regular expression is used for performing string operation
+detail about this can be searched in python.org
+
+-> stringIO is also library available to save a string as a file and perform operation
+details can be found on website
+
+-> sets hold unique elements
+-> sets and dictionary both hold values in {} braces
+===================== edx ====================
+student_name = "Anjali"
+indexing from start of the string will be 0,1,2,3,4,5 and for reverse it will be -1, -2, -3, -4, -5, -6
+print(student_name[0], student_name[1]) -> A n
+-> range(10) -> this means range is 0 to 9. the number provided is the end of the range
+-> lists can be added to each other using extend() function, or they can be even added as done in numeric operation
+-> list can be revered using a .reverse() function
+-> sort(list_name.sort() is the syntax) and sorted(sorted(list_name) is the syntax) function
+-> longer string can be splitted into  shorter strings using split function (syntax = list_name.split())
+-> triple quotes ''' ''' preserve formatting such as spaces and line breaks
+	example: big_quote = """Jack and Jill went up the hill
+	To fetch a pail of water
+	Jack fell down and broke his crown
+	And Jill came tumbling after"""
+->to build a string from a list of strings, use join
+  example:  example1 = ['p','y','t','h','o','n']
+			noSpace = ''
+			example2 = noSpace.join(example1)
+-> to cast a string to list:
+	name = list("hello") #now name is a list
+-> print("Hello", end='*') -> default action for end is \n, which is why every print happens on new line.
+   so if you want to avoid printing on new line with something else, then define end 
+   
+======= file operation ========
+#opening a file
+poem_file = open('poem1.txt', 'r')
+#reading from a file
+poem_content = poem_file.read()
+#reading 10 character from a file
+poem_content1 = poem_file.read(10)
+#If you want to save a string as a list, then use readlines	function
+	poem1 = open('poem1.txt', 'r')
+	poem_lines = poem1.readlines()
+	poem_lines
+#to read each line separately from the file, its readline and not readlines
+poem_lines = poem_file.readline()
+for line in poem_lines:
+	print(line)
+#to remove the unnecessary new line character
+count = 0
+for line in poem_lines:
+    poem_lines[count] = line[:-1]
+    count += 1
+print(poem_lines)
+#close the file to free the memory
+poem1.close()
+#to remove leading and trailing white spaces, new lines, use strip()
+poem1 = open('poem1.txt', 'r')
+poem_line = poem1.readline().strip()
+while poem_line:
+    print(poem_line)
+    poem_line = poem1.readline().strip()	
+#strip with argument will just remove whatever is unwanted
+#example
+poem_line = poem1.readline().strip('\n')	
+============= udemy python bootcamp ======================
+>>>6 - 5.7	
+0.299999999999998
+digits gets lost in precision, so to avoid this we should take help of round	
+>>>round(6-5.7,2)	
+round should always be used when dealing with float numbers	
+list_1 = ["bread","butter","jam","cheese"]
+list_1.append("biscuits") -> append will add to the end of the list 
+list_1.insert(1,"cookies") -> this will insert cookies at location 1	
+list_2 = ["soap", "shampoo"]	
+list_3 = list_1 + list_2 -> adding 2 lists can be done this way 
+len(list_3) -> gives the length of list_3 	
+For searching an element in list, use "in" operator, it returns True or False based upon its presence
+
+# load data from a json to a dictionary
+member = json.loads(json_to_string)	
+
+# dumping a dictionary created as json into a string	
+string_of_json = json.dumps(person)	
+
+-> regular expression helps to find a pattern in string, or string operation
+-> urllib is a built in library which we use for networking programming 
+   example GET and POST over HTTP
+-> we installed beautiful soup library for HTML parsing using command line(cmd) -> pip install beautifulsoup4
+
+-> database is like dictionary, key value type of arrangement
+-> Operations: Insert, Read, Update, Delete 
+-> Database Browser is a software where we can visualize the DB. we have installed it in C:\Program Files\DB Browser for SQLite
+-> Datatypes supported by SQLITE: INTEGER, TEXT, REAL(float), NULL, BLOB(Images, docs, bianry files, etc.)
+-> if i want to know what all functionality are available inside math library or calendar library, then i can get that information in 
+dir(math), dir(calendar)
+-> Global Interpreter Lock(GIL) prevents from using true benefits of multithreading. GIL is a mutex or lock that allows only one thread to hold
+the control of the python interpreter. The impact of GIL is not visible in single threads small programs, but it can result in bottle neck in CPU intensive multi threaded code thus if doing CPU intensive work but not waiting for any I/O bound work then use multiprocessing 
+
+-> constructor is defined as __init__(self):
+
+-> isinstance tells whether an object is an instance of a particular class or not. for example refer to oops_inheritence.py file 
+->issubclass tells whether an object is inherted from another object for example refer to oops_inheritence.py file
+
+-> using yield the item of a list can be returned then and there itself instead of a big list in the end, example list of Jio subscriber in Mumbai 
+-> Numpy is a popular python module used in scientific computing 
+-> Numpy's most important and useful feature is n-dimensional array object 
+-> Numpy is faster compared to list provided by python, hence it is favored over python lists for saving large amount of data 
+================================================================
+-> append method adds to the end of the list and not in between
+-> for removing entries from dictionary, we use pop function:
+   dt.pop(key)
+-> to check if value 200 exists in the following dictionary: 
+   dt = {'a':100, 'b':200, 'c':300}
+   if 200 in dt.values()
+		print('yes its present')
+-> for renaming a key in dictionary:
+    sample_dict = {"name":"key", 
+	               "age":25, 
+				   "salary":5000, 
+				   "city":"Mumbai"}
+    sample_dict['location'] = sample_dict.pop('city')	
+	
+-> .format(value) is used for creating strings with replaced values
+eg: url = "https://finance.yahoo.com/quote/{}/cash-flow?p={}".format(ticker, ticker)
+    print("Hello, I am {} years old !".format(18))
+	print("{}, A computer science portal for geeks."
+      .format("GeeksforGeeks"))
+	str = "This article is written in {}"
+    print(str.format("Python"))  
+	
+	
