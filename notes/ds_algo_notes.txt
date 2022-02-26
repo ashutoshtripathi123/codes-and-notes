@@ -31,6 +31,19 @@ eg: n=4, k=3
 initialize a vector from a set:
 set<int>s= {1,2,3};
 vector<int>v(s.begin(), s.end());
+
+Initializing a vector during declaration:
+vector<int>ways(5, 0); //creates a vector of size 5 and initializes all elements to Zero
+
+whats the difference between v.at(i) vs v[i] when accessing a value inside a vector:
+-> in case of out of bound reach, at() has exception handling capability, whereas [] doesnt
+
+-> s.find(3) works well for set, map, but not in case of vector. I messed it up in an interview with CME group
+syntax is:
+vector<int>::iterator it;
+it = find(v.begin(), v.end(), 3);
+if (it != v.end())
+	cout<<"element found";
 =================== map ================
 MAP by default stores elements in ascending order 
 =============== heap ==================
@@ -39,7 +52,7 @@ MAP by default stores elements in ascending order
 -> application : 
 -> While creating heap, we first fill the left child then right. 
 ============ priority_queue ======================
--> priority_queue is a special queue that stores elements in increasing order. all insert, and delete will lead to realignment of elements such that order is maintained
+-> priority_queue is a special queue that stores elements in decreasing order. all insert, and delete will lead to realignment of elements such that order is maintained
 by default priority_queue is descending order, to use priority_queue as ascending order, certain changes are required in logic.
 Please go through the sample code
 ================ set ======================
@@ -54,14 +67,14 @@ To search: if (data.find(nums[i]) != data.end())
 to erase after searching: s1.erase(s1.find(50))
 ================ deque ====================
 deque is a double ended queue, where insertion and deletion happens at both the ends.
-SYntax is as follows:
-    deque <int> gquiz;
-    gquiz.push_back(10);
-    gquiz.push_front(20);
-    gquiz.push_back(30);
-    gquiz.push_front(15);
-	gquiz.pop_front();
-	gquiz.pop_back();
+Syntax is as follows:
+deque <int> gquiz;
+gquiz.push_back(10);
+gquiz.push_front(20);
+gquiz.push_back(30);
+gquiz.push_front(15);
+gquiz.pop_front();
+gquiz.pop_back();
 ============= list ======================
 if I need to use linked list in my code, then use list<int> instead of declaring the structure, doing memory allocation and all that 
 ready made utility is available in c++
@@ -96,6 +109,26 @@ this seems to be a very common approach. Do refer to this one on leetcode
 
 -> Given two strings str1 and str2 and below operations that can be performed on str1. Find minimum number of edits (operations) required to convert ‘str1’ into ‘str2’ = Levenshtein distance. this is basically converting str1 to str2. test case could be dictionary on cell phone, where ont typing
  the software checks how closer you are to a particular word 
+
+Minimum Spanning Tree(MST):
+MST is a subset of a tree, where we select all the Nodes, but the number of edges to be selected is (V-1)
+
+How to select Minimum Spanning Tree:
+Prim's Algorithm:
+1) Select edge with minimum cost 
+2) Select next minimum edge connected to the above already selected edge 
+3) Prim's algorithm does not work for disconnected graphs
+
+Kruskal's Algorithm:
+1) Select minimum cost edge
+2) Select another minimum cost edge. If the edge creates a loop, then select another edge 
+3) Keep on selecting edges till the time V-1 edges are selected 
+4) To improve the efficiency of kruskal's algo, use min heap 
+5) It may work for disconnected graphs 
+
+
+
+
 
 
 

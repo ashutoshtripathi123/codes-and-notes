@@ -16,6 +16,9 @@ Capacity::
 3. capacity() – Returns the size of the storage space currently allocated to the vector expressed as number of elements
 4. resize(size_type g) – Resizes the container so that it contains ‘g’ elements
 5. empty() – Returns whether the container is empty
+6. reserve(n) - If i am sure that i will need to store 'n'  elements then its better to reserve it
+Difference between resize and reserve - resize can be used to increase or decrease the vector,
+                                        reserve can be used to allocate defined space right at the beginning 
 
 Modifiers::
 1.1 assign(input_iterator first, input_iterator last) – Assigns new content to vector and resize

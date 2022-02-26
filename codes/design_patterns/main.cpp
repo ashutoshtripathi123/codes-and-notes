@@ -3,7 +3,10 @@
 #include "observer/observer.cpp"
 #include "factoryPattern/factoryPattern.cpp"
 #include "decorator/decorator.h"
+#include "object_pool/object_pool.cpp"
 using namespace std;
+
+ObjectPool* ObjectPool::objectPoolInstance = nullptr;
 
 int main()
 {
@@ -112,9 +115,20 @@ int main()
     delete pWafferIceCream;
     #endif
     /***************************************************/
-    /******************Adapter**************************/
+    /******************Object Pool *********************/
     #if 1
-
+	ObjectPool *pool = ObjectPool::getObjectPoolInstance();
+	Resource *one, *two;
+	one = pool->getResource();
+	one->setValue(10);
+	
+	two = pool->getResource();
+	two->setValue(20);
+	
+	cout<<"One Object = "<<one->getValue()<<", two object = "<<two->getValue()<<endl;
+	pool->returnResource(one);
+	pool->returnResource(two);
     #endif
     /***************************************************/
+    return 0;
 }

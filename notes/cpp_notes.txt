@@ -114,7 +114,7 @@ eg: class Scanner: virtual public PoweredDevice
 >a class having pure virtual function, cannot create its own object directly
 Virtual destructors = http://www.geeksforgeeks.org/pure-virtual-destructor-c/
 > Can a virtual function be declared as inline. Yes and No both. Yes in case if the object is defined by value. Coz in that case, the compiler would be knowing during compilation time, which function needs to be called. In case if you're creating you're object by reference, then No, as virtual function resolution would be required to be done during run time, so in that case you cannot have virtual function as inline.
-
+-> vtable is created for class if it has virtual function, whereas vptr is created for each object of the class
 ============================================ operator overloading =========================================
 >in C++ operators are treated as functions. Hence if you see a+b; you should interpret it as operator+(a,b), only if operator overloading is done via friend function
 >Following keywords cannot be overloaded:: 
@@ -247,5 +247,18 @@ benefits of initialization list:
 	>For initialization of member objects which do not have default constructor
 	>parameterized constructor of base class can only be called using Initializer List
 	>
+================================== SOLID Principles ===============================
+source = https://www.freecodecamp.org/news/solid-principles-explained-in-plain-english/
+in short summary:
+S = Single Responsibility Principle = One class should do only one job. eg. no printing job in invoicce class 
+O = Open for extension, closed for modification = use abstract class so that later we can add more flexibility eg: Persistence = DB or File. Using Factory DP 
+L = Liscov's Principle = Meaning if A<-B then B should be able to substitute A wherever A is reqd.
+I = Interface Seggregation Principle = Do not create one big interface such that in the implementation evenif we dont need it,
+    we end up defining it eg: Paid Parking, Free Parking, Fee Calculator 
+D = Dependency Inversion Principle = Our class should depend upon interface and not concrete classes 	
 ================================== threads =============================
+
+========================= important question for revision =================
+https://www.geeksforgeeks.org/how-to-implement-user-defined-shared-pointers-in-c/
+https://www.geeksforgeeks.org/program-to-create-custom-vector-class-in-c/
 	

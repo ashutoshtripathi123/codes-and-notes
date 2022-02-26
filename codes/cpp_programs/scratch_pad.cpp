@@ -134,4 +134,25 @@ int main()
 }
 #endif
 //////////////////////////
+#if 0 //applied materials 
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
 
+class book
+{
+ public:
+ void bookinfo() 
+ {
+     cout<<"inside BookInfo"; 
+     delete this;
+     }
+};
+int main() 
+{
+    book *p = new book();
+    p->bookinfo(); 
+    book bk;
+    bk.bookinfo(); 
+}
+#endif

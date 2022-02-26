@@ -28,8 +28,13 @@ int main()
     }
 
     sort(vec.begin(), vec.end(), comparator);
+    // Below is the example of lambda function
+//    sort(vec.begin(), vec.end(), [](const pair<int, int>&a, const pair<int, int>&b){
+//	    if (a.first > b.first) return false;
+//    		return true;
+//	});
 
-    cout<<"Sorting the vector elements on the basis of second element of pairs in ascending order:"<<endl;
+    cout<<"Sorting the vector elements on the basis of First element of pairs in ascending order:"<<endl;
     for(int i=0; i< 5; i++)
     {
         cout<<"First: "<<vec[i].first<<", second: "<<vec[i].second<<endl;
